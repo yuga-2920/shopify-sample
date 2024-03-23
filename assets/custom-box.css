@@ -1,0 +1,45 @@
+.custom-box {
+  position: relative;
+}
+
+.custom-box__img {
+  overflow: hidden;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.custom-box__img img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 620 / 210;
+  object-fit: cover;
+  transition: .3s;
+}
+
+.custom-box__img img:hover {
+  transform: scale(1.05);
+  transition: .3s;
+}
+
+.custom-box__ttl {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: 24px;
+  padding: 10px;
+  background-color: #fff;
+  text-align: center;
+}
+
+@media screen and (max-width : 767px) {
+  .custom-box__ttl {
+    font-size: 3vw;
+  }
+}

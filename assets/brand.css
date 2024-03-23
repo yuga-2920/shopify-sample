@@ -1,0 +1,29 @@
+#brand {
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.brand-wrapper {
+  display: flex;
+  gap: 50px;
+  justify-content: center;
+}
+
+@media screen and (max-width : 767px) {
+  .brand-wrapper {
+    flex-direction: column;
+  }
+}
+
+.brand-text {
+  width: 370px;
+}
+
+@media screen and (max-width : 767px) {
+  .brand-text {
+    width: initial;
+  }
+}
+
+.brand-btn {
+  margin-top: 50px;
+}

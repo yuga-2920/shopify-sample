@@ -1,0 +1,77 @@
+.social-links a {
+  display: -moz-inline-stack;
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+  margin: 0;
+  padding: 0.05em;
+  font-size: 22px !important;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.swiper-pagination,
+.swiper-button-next,
+.swiper-button-prev,
+.swiper-pagination__num,
+.swiper-pagination__dot {
+  display: block!important;
+}
+
+@media screen and (max-width : 767px) {
+  .common-content {
+    padding: 0 5rem;
+  }
+}
+
+.common-text {
+  letter-spacing: 0.1em;
+  line-height: 2;
+}
+@media screen and (max-width : 767px) {
+  .common-btn {
+    margin-top: 30px;
+    text-align: center;
+  }
+}
+.common-btn a {
+  color: #fff;
+}
+.common-product-list-btn {
+  margin-top: 70px;
+  text-align: center;
+}
+.common-header {
+  position: relative;
+  text-align: center;
+}
+.common-header::after{
+  content: '';
+  position: absolute;
+  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);;
+  display: inline-block;
+  border-bottom: 1px solid;
+  width: 80px;
+}
+.common-ttl {
+  margin: 0;
+  font-family: var(--primary-font-family);
+  font-size: 40px;
+  letter-spacing: 0.2em;
+}
+.common-subttl {
+  margin: 5px 0 15px;
+  font-size: 14px;
+}
+
+.common-tag {
+  color: #fff;
+  padding: 1px 5px;
+  font-size: 12px;
+  margin: 0;
+}

@@ -1,0 +1,91 @@
+{{ 'corporate-customer.css' | asset_url | stylesheet_tag }}
+
+<section id="corporate-customer" class="custom-wrapper__{{ section.id }}">
+  <div class="corporate-customer-wrapper">
+    <div class="corporate-customer-header common-header">
+      <h2 class="common-ttl">
+        CORPORATE <br>
+        CUSTOMER
+      </h2>
+      <p class="common-subttl">卸売用新規登録</p>
+    </div>
+    <div class="corporate-customer-content common-content">
+      <div class="corporate-customer-text common-text">
+        {{ section.settings.textarea | newline_to_br }}
+      </div>
+      <div class="corporate-customer-btn common-btn">
+        <a class="common-btn__text button" href="{{ section.settings.url }}">
+          ご登録はこちら
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .custom-wrapper__{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background-image: url({{ section.settings.pc_img | image_url: height: 500 }});
+  }
+  @media screen and (max-width : 767px) {
+    .custom-wrapper__{{ section.id }} {
+      background-image: url({{ section.settings.mobile_img | image_url: height: 500 }});
+    }
+  }
+</style>
+
+
+{% schema %}
+  {
+    "name": "CORPORATE CASTOMER",
+    "settings": [
+      {
+        "type": "textarea",
+        "id": "textarea",
+        "label": "テキスト"
+      },
+      {
+        "type": "url",
+        "id": "url",
+        "label": "ボタンの遷移先"
+      },
+      {
+        "type": "image_picker",
+        "id": "pc_img",
+        "label": "PC版背景画像"
+      },
+      {
+        "type": "image_picker",
+        "id": "mobile_img",
+        "label": "モバイル版背景画像"
+      }, {
+        "type": "header",
+        "content": "t:sections.all.padding.section_padding_heading"
+      }, {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "t:sections.all.padding.padding_top",
+        "default": 36
+      }, {
+        "type": "range",
+        "id": "padding_bottom",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "t:sections.all.padding.padding_bottom",
+        "default": 36
+      }
+    ],
+    "presets": [
+      {
+        "name": "CORPORATE CASTOMER"
+      }
+    ]
+  }
+{% endschema %}

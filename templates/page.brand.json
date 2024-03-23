@@ -1,0 +1,103 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "rich_text_4aRME6": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_UmtAjM": {
+          "type": "heading",
+          "settings": {
+            "heading": "ブランド一覧",
+            "heading_size": "h1"
+          }
+        },
+        "text_wYQBF4": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Cozy Bakeryではさまざまなパンを取り扱っています。<\/p><p>日々の彩りにパンをぜひ。<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_UmtAjM",
+        "text_wYQBF4"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "left",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "multicolumn_C7apzG": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_hjx8Ci": {
+          "type": "column",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Untitled_logo_6_free-file_1.jpg",
+            "title": "",
+            "text": "",
+            "link_label": "Bread Palette",
+            "link": "shopify:\/\/collections\/bread-palette"
+          }
+        },
+        "column_PPWzzR": {
+          "type": "column",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Untitled_logo_8_free-file_1.jpg",
+            "title": "",
+            "text": "",
+            "link_label": "Natural Harvest",
+            "link": "shopify:\/\/collections\/natural-harvest"
+          }
+        },
+        "column_dKLimj": {
+          "type": "column",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Untitled_logo_7_free-file_1.jpg",
+            "title": "",
+            "text": "",
+            "link_label": "Bread Harmony",
+            "link": "shopify:\/\/collections\/bread-harmony"
+          }
+        }
+      },
+      "block_order": [
+        "column_hjx8Ci",
+        "column_PPWzzR",
+        "column_dKLimj"
+      ],
+      "settings": {
+        "title": "",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "columns_desktop": 3,
+        "column_alignment": "center",
+        "background_style": "none",
+        "button_label": "",
+        "button_link": "",
+        "color_scheme": "scheme-1",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "main",
+    "rich_text_4aRME6",
+    "multicolumn_C7apzG"
+  ]
+}

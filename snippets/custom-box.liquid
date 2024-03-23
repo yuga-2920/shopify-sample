@@ -1,0 +1,13 @@
+{{ 'custom-box.css' | asset_url | stylesheet_tag }}
+
+
+<div class="custom-box {{ section.id }}-{{ collection.id }}">
+  <a href="{{ collection.url }}">
+    <div class="custom-box__img">
+      <img src="{{ collection.image | image_url: width: 620 }}" alt="{{ collection.title }}">
+    </div>
+    <h3 class="custom-box__ttl">
+      {{ collection.title }}
+    </h3>
+  </a>
+</div>

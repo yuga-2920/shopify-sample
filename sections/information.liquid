@@ -1,0 +1,94 @@
+{{ 'information.css' | asset_url | stylesheet_tag }}
+
+{% assign blog = blogs.news %}
+
+<section id="information" class="custom-wrapper__{{ section.id }}">
+  <div class="information-wrapper">
+    <div class="information-header common-header">
+      <h2 class="common-ttl">INFORMATION</h2>
+      <p class="common-subttl">インフォメーション</p>
+    </div>
+    <div class="information-content-wrapper">
+      {% for article in blog.articles limit: section.settings.number %}
+        <div class="information-content information-content__{{ article.id }}">
+          <a href="{{ article.url }}" class="information-content__url">
+            <p class="information-content__date">
+              {{ article.published_at | time_tag: format: 'date' }}
+            </p>
+            <h3 class="information-content__ttl">
+              {{ article.title }}
+            </h3>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="information-btn common-btn common-product-list-btn">
+      <a class="common-btn__text button" href="{{ blog.url }}">
+        {{ blog.title }}一覧
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .custom-wrapper__{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background-color: {{ section.settings.background_color }};
+  }
+  .information-content-wrapper .information-content:nth-child(odd) {
+    background-color: {{ section.settings.primary_color }};
+  }
+</style>
+
+
+{% schema %}
+  {
+    "name": "INFORMATION",
+    "settings": [
+      {
+        "type": "color",
+        "id": "background_color",
+        "label": "背景色"
+      },
+      {
+        "type": "color",
+        "id": "primary_color",
+        "label": "強調色"
+      },
+      {
+        "type": "number",
+        "id": "number",
+        "label": "表示件数",
+        "default": 3
+      },
+      {
+        "type": "header",
+        "content": "t:sections.all.padding.section_padding_heading"
+      }, {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "t:sections.all.padding.padding_top",
+        "default": 36
+      }, {
+        "type": "range",
+        "id": "padding_bottom",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "t:sections.all.padding.padding_bottom",
+        "default": 36
+      }
+    ],
+    "presets": [
+      {
+        "name": "INFORMATION"
+      }
+    ]
+  }
+{% endschema %}

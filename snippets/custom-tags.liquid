@@ -1,0 +1,33 @@
+{{ 'custom-tags.css' | asset_url | stylesheet_tag }}
+
+
+<div class="custom-tags">
+  {% if is_default_tag %}
+    <p class="common-tag tag__{{ section.id }}-{{ id }}-0">
+      {{ default_tag_name }}
+    </p>
+    <style>
+      .tag__{{ section.id }}-{{ id }}-0 {
+        background-color: {{ default_tag_color }};
+      }
+    </style>
+  {% endif %}
+  {% for tag in tags %}
+    {% if tag contains "display" %}
+      {% liquid
+        assign tagList1 = tag | split: "__"
+        assign tagList2 = tagList1[1] | split: "--"
+        assign tagName = tagList2[0]
+        assign tagColor = tagList2[1]
+      %}
+      <p class="common-tag custom-tag tag__{{ section.id }}-{{ id }}-{{ forloop.index }}">
+        {{ tagName }}
+      </p>
+      <style>
+        .tag__{{ section.id }}-{{ id }}-{{ forloop.index }} {
+          background-color: {{ tagColor }};
+        }
+      </style>
+    {% endif %}
+  {% endfor %}
+</div>

@@ -1,0 +1,301 @@
+{
+  "sections": {
+    "custom_slideshow_CrbpC3": {
+      "type": "custom-slideshow",
+      "blocks": {
+        "slide_jd7AXe": {
+          "type": "slide",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/Untitled_logo_6_free-file_1.jpg",
+            "pc_image": "shopify:\/\/shop_images\/bakery-1868396_1280.jpg",
+            "pc_position_top": 50,
+            "pc_position_left": 30,
+            "mobile_image": "shopify:\/\/shop_images\/flour-5290444_1280.jpg",
+            "mobile_position_top": 50,
+            "mobile_position_left": 50,
+            "textarea": "色とりどりのパンで食卓を彩る",
+            "url": "shopify:\/\/collections\/bread-palette"
+          }
+        },
+        "slide_hBEqDw": {
+          "type": "slide",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/natural_harvest.jpg",
+            "pc_image": "shopify:\/\/shop_images\/dan-meyers-0AgtPoAARtE-unsplash.jpg",
+            "pc_position_top": 50,
+            "pc_position_left": 50,
+            "mobile_image": "shopify:\/\/shop_images\/ophelie-authier-MtoudfurFlw-unsplash_1.jpg",
+            "mobile_position_top": 50,
+            "mobile_position_left": 50,
+            "textarea": "パンとコーヒーがもたらす穏やかな朝の時間",
+            "url": "shopify:\/\/collections\/natural-harvest"
+          }
+        },
+        "slide_Mb3JNr": {
+          "type": "slide",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/Untitled_logo_7_free-file_1.jpg",
+            "pc_image": "shopify:\/\/shop_images\/AdobeStock_550022480.jpg",
+            "pc_position_top": 50,
+            "pc_position_left": 50,
+            "mobile_image": "shopify:\/\/shop_images\/AdobeStock_234231581.jpg",
+            "mobile_position_top": 50,
+            "mobile_position_left": 50,
+            "textarea": "化学肥料や農薬を使用しない、地球に優しい農法",
+            "url": "shopify:\/\/collections\/bread-harmony"
+          }
+        }
+      },
+      "block_order": [
+        "slide_jd7AXe",
+        "slide_hBEqDw",
+        "slide_Mb3JNr"
+      ],
+      "settings": {
+      }
+    },
+    "video_Ciphjp": {
+      "type": "video",
+      "settings": {
+        "heading": "",
+        "heading_size": "h2",
+        "enable_video_looping": false,
+        "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
+        "cover_image": "shopify:\/\/shop_images\/AdobeStock_296675433.jpg",
+        "description": "",
+        "full_width": false,
+        "color_scheme": "",
+        "padding_top": 68,
+        "padding_bottom": 32
+      }
+    },
+    "about_LBVqTp": {
+      "type": "about",
+      "settings": {
+        "color_scheme": "",
+        "textarea": "COZY BAKERYは冷凍パンの\nECサイトです。\nパンの数だけ幸せがある。",
+        "url": "shopify:\/\/collections\/all",
+        "left_color": "#a2bd87",
+        "left_img": "shopify:\/\/shop_images\/dan-meyers-0AgtPoAARtE-unsplash.jpg",
+        "right_color": "#cfb33c",
+        "right_img": "shopify:\/\/shop_images\/bakery-1868396_1280.jpg",
+        "padding_top": 64,
+        "padding_bottom": 80
+      }
+    },
+    "brand_aHkbiV": {
+      "type": "brand",
+      "settings": {
+        "textarea": "様々な種類のパンだけでなく、\nパンをより美味しくする\nジャムやコーヒーも提供します。",
+        "url": "shopify:\/\/pages\/brands",
+        "pc_img": "shopify:\/\/shop_images\/2.png",
+        "mobile_img": "shopify:\/\/shop_images\/4fb17b018ddb0b0b1fe21987ee966246.png",
+        "padding_top": 96,
+        "padding_bottom": 100
+      }
+    },
+    "ranking_JbUfej": {
+      "type": "ranking",
+      "blocks": {
+        "color_YDPgLK": {
+          "type": "color",
+          "settings": {
+            "color": "#fc6926"
+          }
+        },
+        "color_97EhqB": {
+          "type": "color",
+          "settings": {
+            "color": "#24eddb"
+          }
+        },
+        "color_m86RVV": {
+          "type": "color",
+          "settings": {
+            "color": "#b83aed"
+          }
+        },
+        "color_7pBDfQ": {
+          "type": "color",
+          "settings": {
+            "color": "#da1d61"
+          }
+        }
+      },
+      "block_order": [
+        "color_YDPgLK",
+        "color_97EhqB",
+        "color_m86RVV",
+        "color_7pBDfQ"
+      ],
+      "settings": {
+        "background_color": "",
+        "collection": "ranking",
+        "padding_top": 68,
+        "padding_bottom": 68
+      }
+    },
+    "new_item_yCUEcF": {
+      "type": "new-item",
+      "settings": {
+        "background_color": "#fafafa",
+        "collection": "new",
+        "number": 10,
+        "checkbox": true,
+        "color": "#de0c99",
+        "padding_top": 68,
+        "padding_bottom": 68
+      }
+    },
+    "category_7AQe9V": {
+      "type": "category",
+      "blocks": {
+        "collection_BpiXA3": {
+          "type": "collection",
+          "settings": {
+            "collection": "meal-bread"
+          }
+        },
+        "collection_YADrdA": {
+          "type": "collection",
+          "settings": {
+            "collection": "sweet-bread"
+          }
+        },
+        "collection_fzLBhj": {
+          "type": "collection",
+          "settings": {
+            "collection": "hard-bread"
+          }
+        },
+        "collection_n8RYK3": {
+          "type": "collection",
+          "settings": {
+            "collection": "bucket"
+          }
+        },
+        "collection_PBXKNp": {
+          "type": "collection",
+          "settings": {
+            "collection": "scone"
+          }
+        },
+        "collection_WUctxN": {
+          "type": "collection",
+          "settings": {
+            "collection": "nuts-dried-fruit"
+          }
+        },
+        "collection_d7AqYf": {
+          "type": "collection",
+          "settings": {
+            "collection": "low-sugar"
+          }
+        },
+        "collection_gPYfYT": {
+          "type": "collection",
+          "settings": {
+            "collection": "coffee"
+          }
+        },
+        "collection_Dgfy7r": {
+          "type": "collection",
+          "settings": {
+            "collection": "butter-jam"
+          }
+        }
+      },
+      "block_order": [
+        "collection_BpiXA3",
+        "collection_YADrdA",
+        "collection_fzLBhj",
+        "collection_n8RYK3",
+        "collection_PBXKNp",
+        "collection_WUctxN",
+        "collection_d7AqYf",
+        "collection_gPYfYT",
+        "collection_Dgfy7r"
+      ],
+      "settings": {
+        "checkbox": true,
+        "background_color": "",
+        "padding_top": 68,
+        "padding_bottom": 68
+      }
+    },
+    "blog_JJqtmD": {
+      "type": "blog",
+      "settings": {
+        "background_color": "",
+        "number": 3,
+        "padding_top": 68,
+        "padding_bottom": 68
+      }
+    },
+    "information_FwYc6n": {
+      "type": "information",
+      "settings": {
+        "background_color": "#fafafa",
+        "primary_color": "#e9cd89",
+        "number": 3,
+        "padding_top": 68,
+        "padding_bottom": 68
+      }
+    },
+    "common_header_XfKEy8": {
+      "type": "common-header",
+      "settings": {
+        "background_color": "",
+        "title": "INSTAGRAM",
+        "sub_title": "@cozy_bread_demo",
+        "padding_top": 68,
+        "padding_bottom": 36
+      }
+    },
+    "17091312850585df3a": {
+      "type": "apps",
+      "blocks": {
+        "instafeed_app_block_HnXmhW": {
+          "type": "shopify:\/\/apps\/instafeed\/blocks\/app-block\/c447db20-095d-4a10-9725-b5977662c9d5",
+          "settings": {
+            "title": "",
+            "title_color": "",
+            "alignment": "center",
+            "html_area": ""
+          }
+        }
+      },
+      "block_order": [
+        "instafeed_app_block_HnXmhW"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "corporate_customer_x4AfzK": {
+      "type": "corporate-customer",
+      "settings": {
+        "textarea": "法人様向けの製品もお取り扱いしております。\n新規ご登録お待ちしております。",
+        "url": "shopify:\/\/pages\/contact",
+        "pc_img": "shopify:\/\/shop_images\/sarah-mason-cUY7u2Fskk4-unsplash.jpg",
+        "mobile_img": "shopify:\/\/shop_images\/hamza-madrid-hMuEzwHAxsU-unsplash.jpg",
+        "padding_top": 44,
+        "padding_bottom": 44
+      }
+    }
+  },
+  "order": [
+    "custom_slideshow_CrbpC3",
+    "video_Ciphjp",
+    "about_LBVqTp",
+    "brand_aHkbiV",
+    "ranking_JbUfej",
+    "new_item_yCUEcF",
+    "category_7AQe9V",
+    "blog_JJqtmD",
+    "information_FwYc6n",
+    "common_header_XfKEy8",
+    "17091312850585df3a",
+    "corporate_customer_x4AfzK"
+  ]
+}

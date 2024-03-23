@@ -1,0 +1,79 @@
+.custom-card__link {
+  color: inherit;
+  transition: .3s;
+}
+
+.custom-card__link:hover {
+  transition: .3s;
+}
+
+.coustom-card__icon {
+  position: relative;
+}
+
+.coustom-card__icon svg {
+  position: absolute;
+  top: -30px;
+  left: -30px;
+  z-index: 1;
+}
+
+.coustom-card__icon-rank {
+  font-size: 38px;
+  color: #fff;
+  position: absolute;
+  top: -75px;
+  left: -10px;
+  z-index: 2;
+}
+
+.custom-card__img {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10%;
+}
+
+.custom-card__img img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  transition: .3s;
+}
+
+.custom-card__img img:hover {
+  transform: scale(1.05);
+  transition: .3s;
+}
+
+.custom-card__badge {
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+}
+
+.custom-card__info {
+  margin-left: 10px;
+}
+
+.custom-card__header {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  align-items: center;
+}
+
+.custom-card__ttl,
+.custom-card__price,
+.custom-card__tax {
+  margin: 0;
+}
+
+.custom-card__bottom {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+

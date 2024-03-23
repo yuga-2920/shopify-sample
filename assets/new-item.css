@@ -1,0 +1,34 @@
+.new-item-content-wrapper {
+  margin-top: 90px;
+  position: relative;
+}
+
+.new-item-wrapper .new-item-btn {
+  margin-top: 70px;
+  text-align: center;
+}
+
+.new-item-wrapper .swiper-button-next::after,
+.new-item-wrapper .swiper-button-prev::after {
+  font-size: 30px;
+}
+
+@media screen and (max-width : 767px) {
+  .new-item-wrapper .swiper-button-next,
+  .new-item-wrapper .swiper-button-prev {
+    display: none!important;
+  }
+}
+
+
+
+.swiper-button-next,
+.swiper-button-prev {
+  top: 30%;
+}
+.swiper-button-next {
+  right: -35px;
+}
+.swiper-button-prev {
+  left: -30px;
+}

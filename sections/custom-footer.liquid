@@ -1,0 +1,203 @@
+{{ 'custom-footer.css' | asset_url | stylesheet_tag }}
+{{ 'social/social-icons.css' | global_asset_url | stylesheet_tag }}
+
+<footer class="footer custom-footer custom-wrapper__{{ section.id }}">
+  <div class="custom-footer-wrapper">
+    <div class="custom-footer__content-top page-width">
+      <div class="custom-footer__img">
+        <img src="{{ settings.logo | image_url: width: 400 }}" alt="{{ shop.name }}">
+      </div>
+      <div class="custom-footer__content">
+        <div class="custom-footer__companey-info companey-info">
+          <p>{{ shop.address.company }}</p>
+          <p>〒{{ shop.address.zip }}</p>
+          <p>
+            {{ shop.address.province }} {{ shop.address.city }} {{ shop.address.street | split: ',' }}
+          </p>
+          <p>TEL：{{ shop.phone }}</p>
+          <p>営業時間：{{ section.settings.business_hours }}</p>
+          <p>定休日：{{ section.settings.holiday }}</p>
+        </div>
+        <div class="custom-footer__links">
+          <ul class="custom-footer__links-left list-unstyled">
+            {%- for link in linklists.footer-left-menu.links -%}
+              <li>
+                <a href="{{ link.url }}" class="custom-footer_links list-menu__item--link{% if link.active %} list-menu__item--active{% endif %}">
+                  {{ link.title }}
+                </a>
+              </li>
+            {%- endfor -%}
+          </ul>
+          <ul class="custom-footer__links-right list-unstyled">
+            {%- for link in linklists.footer-right-menu.links -%}
+              <li>
+                <a href="{{ link.url }}" class="custom-footer_links list-menu__item--link{% if link.active %} list-menu__item--active{% endif %}">
+                  {{ link.title }}
+                </a>
+              </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+        <div class="custom-footer__btns">
+          <div class="custom-footer__btn contact-btn common-btn">
+            <a class="common-btn__text button contact-btn__text" href="{{ pages.contact.url }}">
+              {{ pages.contact.title }}
+            </a>
+          </div>
+          <div class="custom-footer__btn custom-email-form">
+            <p>メルマガ登録で最新情報をお届け</p>
+            {%- form 'customer'
+              , id: 'ContactFooter'
+              , class: 'custom-footer__newsletter footer__newsletter newsletter-form' -%}
+              <input
+                type="hidden"
+                name="contact[tags]"
+                value="newsletter">
+              <div class="newsletter-form__field-wrapper">
+                <div class="custom-field field">
+                  <input
+                    id="NewsletterForm--{{ section.id }}"
+                    type="email"
+                    name="contact[email]"
+                    class="field__input custom-field__input"
+                    value="{{ form.email }}"
+                    aria-required="true"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    autocomplete="email"
+                    {% if form.errors %}
+                    autofocus
+                    aria-invalid="true"
+                    aria-describedby="ContactFooter-error"
+                    {% elsif form.posted_successfully? %}
+                    aria-describedby="ContactFooter-success"
+                    {% endif %}
+                    placeholder="{{ 'newsletter.label' | t }}"
+                    required>
+                  <label class="field__label" for="NewsletterForm--{{ section.id }}">
+                    {{ 'newsletter.label' | t }}
+                  </label>
+                  <button
+                    type="submit"
+                    class="newsletter-form__button field__button"
+                    name="commit"
+                    id="Subscribe"
+                    aria-label="{{ 'newsletter.button_label' | t }}">
+                    {% render 'icon-arrow' %}
+                  </button>
+                </div>
+                {%- if form.errors -%}
+                  <small class="newsletter-form__message form__message" id="ContactFooter-error">
+                    {%- render 'icon-error' -%}
+                    {{- form.errors.translated_fields.email | capitalize }}
+                    {{ form.errors.messages.email -}}
+                  </small>
+                {%- endif -%}
+              </div>
+              {%- if form.posted_successfully? -%}
+                <h3
+                  class="newsletter-form__message newsletter-form__message--success form__message"
+                  id="ContactFooter-success"
+                  tabindex="-1"
+                  autofocus>
+                  {% render 'icon-success' -%}
+                  {{- 'newsletter.success' | t }}
+                </h3>
+              {%- endif -%}
+            {%- endform -%}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="custom-footer__content-bottom">
+      <div class="page-width">
+        <ul class="custom-footer__legal-links list-unstyled">
+          {%- for link in linklists.legal-menu.links -%}
+            <li>
+              <a href="{{ link.url }}" class="custom-footer_link list-menu__item--link{% if link.active %} list-menu__item--active{% endif %}">
+                {{ link.title }}
+              </a>
+            </li>
+          {%- endfor -%}
+        </ul>
+        <div class="custom-footer__social-links social-links">
+          <a
+            href="https://www.facebook.com/shopify"
+            title="Follow us on Facebook"
+            target="_blank"
+            rel="noopener noreferrer">
+            <img src="{{ 'icon-facebook.svg' | asset_url }}" alt="Follow us on Facebook">
+          </a>
+          <a
+            href="https://twitter.com/shopify"
+            title="Follow us on Twitter"
+            target="_blank"
+            rel="noopener noreferrer">
+            <img src="{{ 'icon-twitterx.svg' | asset_url }}" alt="Follow us on Twitter">
+          </a>
+          <a
+            href="https://www.instagram.com/cozy_bakery_demo/"
+            title="Follow us on Instagram"
+            target="_blank"
+            rel="noopener noreferrer">
+            <img src="{{ 'icon-instagram.svg' | asset_url }}" alt="Follow us on Instagram">
+          </a>
+          <a
+            href="https://www.youtube.com/shopify"
+            title="Follow us on YouTube"
+            target="_blank"
+            rel="noopener noreferrer">
+            <img src="{{ 'icon-youtube.svg' | asset_url }}" alt="Follow us on YouTube">
+          </a>
+        </div>
+        <div class="custom-footer__copyright">
+          <small class="copyright__content">&copy;{{ 'now' | date: '%Y' }} {{ shop.name | link_to: routes.root_url -}}
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .custom-wrapper__{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    background-color: {{ section.settings.background_color }};
+  }
+</style>
+
+{% schema %}
+  {
+    "name": "オリジナルフッター",
+    "settings": [
+      {
+        "type": "text",
+        "id": "business_hours",
+        "label": "営業時間"
+      }, {
+        "type": "text",
+        "id": "holiday",
+        "label": "定休日"
+      }, {
+        "type": "color",
+        "id": "background_color",
+        "label": "背景色"
+      },
+      {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "t:sections.all.padding.padding_top",
+        "default": 36
+      }
+    ],
+    "presets": [
+      {
+        "name": "オリジナルフッター"
+      }
+    ]
+  }
+{% endschema %}

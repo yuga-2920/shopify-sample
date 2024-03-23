@@ -1,0 +1,185 @@
+{{ "custom-slideshow.css" | asset_url | stylesheet_tag }}
+
+<div class="swiper swiper-{{ section.id }}">
+  <div class="swiper-wrapper">
+    {% for block in section.blocks %}
+      <div class="swiper-slide swiper-content__{{ block.id }}">
+        <div class="swiper-content__bg-img">
+          <picture>
+            <source srcset="{{ block.settings.mobile_image | image_url: width: 1920 }}" media="(max-width: 767px)">
+            <img src="{{ block.settings.pc_image | image_url: width: 800 }}">
+          </picture>
+        </div>
+        <div class="swiper-content__box">
+          <div class="swiper-content__box-img">
+            <img src="{{ block.settings.icon | image_url: width: 180}}">
+          </div>
+          <p class="swiper-content__box-text">
+            {{ block.settings.textarea | newline_to_br }}
+          </p>
+          <div class="swiper-content__box-btn common-btn">
+            <a class="common-btn__text button" href="{{ block.settings.url }}">
+              商品をみにいく
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <style>
+        .swiper-content__{{ block.id }} .swiper-content__box {
+          top: {{ block.settings.pc_position_top }}%;
+          left: {{ block.settings.pc_position_left }}%;
+        }
+
+        @media (max-width: 767px) {
+          .swiper-content__{{ block.id }} .swiper-content__box {
+            top: {{ block.settings.mobile_position_top }}%;
+            left: {{ block.settings.mobile_position_left }}%;
+          }
+        }
+      </style>
+    {% endfor %}
+  </div>
+  <div class="swiper-pagination-wrapper">
+    <div class="swiper-pagination__dots">
+      {% for block in section.blocks %}
+        <div class="
+          swiper-pagination__dot
+          dot-{{ section.id }}__{{ forloop.index }}
+          {% if forloop.first %}active{% endif %}
+        ">
+        </div>
+      {% endfor %}
+    </div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-pagination__num"></div>
+    <div class="swiper-button-next"></div>
+  </div>
+</div>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const swiper = new Swiper(".swiper-{{ section.id }}", {
+      autoplay: {
+        delay: 4500
+      },
+      loop: true,
+      effect: "fade",
+      on: {
+        slideChange: function () {
+          const current = this.realIndex + 1;
+          const dots = document.querySelectorAll(".swiper-pagination__dot");
+
+          dots.forEach(dot => {
+            dot.classList.remove("active");
+          });
+
+          const activeDot = document.querySelector(".dot-{{ section.id }}__" + current);
+          if (activeDot) {
+            activeDot.classList.add("active");
+          }
+        }
+      },
+      breakpoints: {
+        768: {
+          pagination: {
+            el: ".swiper-pagination__num",
+            type: "fraction",
+          },
+          navigation: {
+            nextEl: ".swiper-{{ section.id }} .swiper-button-next",
+            prevEl: ".swiper-{{ section.id }} .swiper-button-prev",
+          }
+        }
+      },
+    });
+
+    // ページネーションドットにイベントリスナーを追加
+    document.querySelectorAll(".swiper-pagination__dot").forEach((item, index) => {
+      item.addEventListener("click", () => {
+        swiper.slideTo(index);
+      });
+    });
+  });
+</script>
+
+
+{% schema %}
+  {
+    "name": "オリジナルスライド",
+    "blocks": [
+      {
+        "type": "slide",
+        "name": "スライド",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "icon",
+            "label": "アイコン"
+          },
+          {
+            "type": "image_picker",
+            "id": "pc_image",
+            "label": "PC用画像"
+          },
+          {
+            "type": "range",
+            "id": "pc_position_top",
+            "label": "PC版 上の位置",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "default": 50,
+            "unit": "%"
+          },
+          {
+            "type": "range",
+            "id": "pc_position_left",
+            "label": "PC版 左の位置",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "default": 50,
+            "unit": "%"
+          }, {
+            "type": "image_picker",
+            "id": "mobile_image",
+            "label": "モバイル用画像"
+          }, {
+            "type": "range",
+            "id": "mobile_position_top",
+            "label": "モバイル版 上の位置",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "default": 50,
+            "unit": "%"
+          }, {
+            "type": "range",
+            "id": "mobile_position_left",
+            "label": "モバイル版 左の位置",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "default": 50,
+            "unit": "%"
+          }, {
+            "type": "textarea",
+            "id": "textarea",
+            "label": "説明文"
+          }, {
+            "type": "url",
+            "id": "url",
+            "label": "ボタンの遷移先"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "オリジナルスライド"
+      }
+    ]
+  }
+{% endschema %}

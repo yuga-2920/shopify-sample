@@ -1,0 +1,32 @@
+.blog-content-wrapper {
+  margin-top: 50px;
+  display: grid;
+  column-gap: 5%;
+  padding: 0 15px;
+}
+
+@media screen and (max-width : 767px) {
+  .blog-content-wrapper {
+    /* display: block; */
+  }
+}
+
+.blog-content__url {
+  align-items: center;
+  display: grid;
+  grid-template-columns: .5fr 1.5fr;
+  padding: 35px 0;
+  margin: 0 auto;
+  width: 90%;
+  max-width: 500px;
+  transition: .3s;
+}
+
+.blog-content__url:hover {
+  opacity: 0.3;
+  transition: .3s;
+}
+
+.blog-content__date {
+  width: 150px;
+}

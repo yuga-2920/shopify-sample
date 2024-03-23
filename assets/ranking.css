@@ -1,0 +1,15 @@
+.ranking-wrapper .ranking-content-wrapper {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 5%;
+  row-gap: 5%;
+  margin-top: 90px;
+}
+@media screen and (max-width : 767px) {
+  .ranking-wrapper .ranking-content-wrapper {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0 5rem;
+    column-gap: 8%;
+    row-gap: 8%;
+  }
+}

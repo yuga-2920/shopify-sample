@@ -1,0 +1,123 @@
+{{ 'about.css' | asset_url | stylesheet_tag }}
+
+<section id="about" class="custom-wrapper__{{ section.id }}">
+  <div class="about-wrapper">
+    <div class="about-left">
+      <div class="about-left__img">
+        <img src="{{ section.settings.left_img | image_url: width: 750, height: 530 }}">
+      </div>
+    </div>
+    <div class="about-center">
+      <div class="about-header common-header">
+        <h2 class="common-ttl">ABOUT</h2>
+        <p class="common-subttl">私たちについて</p>
+      </div>
+      <div class="about-content common-content">
+        <div class="about-text common-text">
+          {{ section.settings.textarea | newline_to_br }}
+        </div>
+        <div class="about-btn common-btn">
+          <a class="common-btn__text button" href="{{ section.settings.url }}">
+            商品をみにいく
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="about-right">
+      <div class="about-right__img">
+        <img src="{{ section.settings.right_img | image_url: width: 460, height: 450 }}">
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .custom-wrapper__{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  .custom-wrapper__{{ section.id }}
+  .about-left::after {
+    background-color: {{ section.settings.left_color }};
+  }
+
+  .custom-wrapper__{{ section.id }}
+  .about-right::after {
+    background-color: {{ section.settings.right_color }};
+  }
+</style>
+
+
+{% schema %}
+  {
+    "name": "ABOUT",
+    "settings": [
+      {
+        "type": "color_scheme",
+        "id": "color_scheme",
+        "label": "ボタンとテキストの色",
+        "info": "ここで色の設定を変更すると他のボタンなどの色も変更されます。",
+        "default": "scheme-1"
+      },
+      {
+        "type": "textarea",
+        "id": "textarea",
+        "label": "テキスト"
+      },
+      {
+        "type": "url",
+        "id": "url",
+        "label": "ボタンの遷移先"
+      },
+      {
+        "type": "header",
+        "content": "コンテンツの変更"
+      }, {
+        "type": "color",
+        "id": "left_color",
+        "label": "左のボックスの色",
+        "default": "#fff"
+      }, {
+        "type": "image_picker",
+        "id": "left_img",
+        "label": "左の画像"
+      }, {
+        "type": "color",
+        "id": "right_color",
+        "label": "右のボックスの色",
+        "default": "#fff"
+      }, {
+        "type": "image_picker",
+        "id": "right_img",
+        "label": "右の画像"
+      }, {
+        "type": "header",
+        "content": "t:sections.all.padding.section_padding_heading"
+      }, {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "t:sections.all.padding.padding_top",
+        "default": 36
+      }, {
+        "type": "range",
+        "id": "padding_bottom",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "t:sections.all.padding.padding_bottom",
+        "default": 36
+      }
+    ],
+    "presets": [
+      {
+        "name": "ABOUT"
+      }
+    ]
+  }
+{% endschema %}

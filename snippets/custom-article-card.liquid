@@ -1,0 +1,16 @@
+{{ 'custom-article-card.css' | asset_url | stylesheet_tag }}
+
+
+<article class="custom-article-card {{ section.id }}-{{ article.id }}">
+  <a href="{{ article.url }}" class="custom-article-card__url">
+    <div class="custom-article-card__img">
+      <img src="{{ article.image.src | image_url: width: 600}}" alt="{{ article.image.alt }}">
+      <div class="custom-article-card__tags">
+        {% render "custom-tags", id: article.id, tags: article.tags %}
+      </div>
+    </div>
+    <p class="custom-article-card__content">
+      {{ article.content | strip_html | strip_newlines | truncate: 35 }}
+    </p>
+  </a>
+</article>

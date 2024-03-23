@@ -1,0 +1,91 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "category_kXzeLB": {
+      "type": "category",
+      "blocks": {
+        "collection_JUczjJ": {
+          "type": "collection",
+          "settings": {
+            "collection": "meal-bread"
+          }
+        },
+        "collection_HAQyef": {
+          "type": "collection",
+          "settings": {
+            "collection": "sweet-bread"
+          }
+        },
+        "collection_69GR96": {
+          "type": "collection",
+          "settings": {
+            "collection": "hard-bread"
+          }
+        },
+        "collection_NjNNHb": {
+          "type": "collection",
+          "settings": {
+            "collection": "bucket"
+          }
+        },
+        "collection_D8WtPh": {
+          "type": "collection",
+          "settings": {
+            "collection": "scone"
+          }
+        },
+        "collection_ViCW4V": {
+          "type": "collection",
+          "settings": {
+            "collection": "nuts-dried-fruit"
+          }
+        },
+        "collection_aygF6e": {
+          "type": "collection",
+          "settings": {
+            "collection": "low-sugar"
+          }
+        },
+        "collection_Qyyr6z": {
+          "type": "collection",
+          "settings": {
+            "collection": "butter-jam"
+          }
+        },
+        "collection_PnjUVN": {
+          "type": "collection",
+          "settings": {
+            "collection": "coffee"
+          }
+        }
+      },
+      "block_order": [
+        "collection_JUczjJ",
+        "collection_HAQyef",
+        "collection_69GR96",
+        "collection_NjNNHb",
+        "collection_D8WtPh",
+        "collection_ViCW4V",
+        "collection_aygF6e",
+        "collection_Qyyr6z",
+        "collection_PnjUVN"
+      ],
+      "settings": {
+        "checkbox": false,
+        "background_color": "",
+        "padding_top": 0,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "main",
+    "category_kXzeLB"
+  ]
+}
