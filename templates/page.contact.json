@@ -7,12 +7,78 @@
         "padding_bottom": 36
       }
     },
-    "form": {
-      "type": "contact-form",
+    "custom_contact_form_A9AFjm": {
+      "type": "custom-contact-form",
+      "blocks": {
+        "text_7WRMrW": {
+          "type": "text",
+          "settings": {
+            "label": "会社名",
+            "required": true
+          }
+        },
+        "name_UUyY7J": {
+          "type": "name",
+          "settings": {
+            "kana": true,
+            "confirm-error": "カタカナで入力してください",
+            "required": true
+          }
+        },
+        "email_eFpmkX": {
+          "type": "email",
+          "settings": {
+            "confirm-email": true,
+            "confirm-label": "確認用メールアドレス",
+            "confirm-error": "メールアドレスが一致しません"
+          }
+        },
+        "select_3ryEc3": {
+          "type": "select",
+          "settings": {
+            "label": "お問い合わせ内容",
+            "select-default": "選択してください",
+            "options": "商品へのご質問,購入方法について,商品の不具合について,ご意見・ご要望",
+            "required": true
+          }
+        },
+        "comment_WL8JcH": {
+          "type": "comment",
+          "settings": {
+            "required": false
+          }
+        },
+        "policy_gKeJVx": {
+          "type": "policy",
+          "settings": {
+            "enable": true,
+            "select-policy": "privacy_policy",
+            "text": "同意する"
+          }
+        }
+      },
+      "block_order": [
+        "text_7WRMrW",
+        "name_UUyY7J",
+        "email_eFpmkX",
+        "select_3ryEc3",
+        "comment_WL8JcH",
+        "policy_gKeJVx"
+      ],
       "settings": {
+        "color_scheme": "",
         "heading": "",
-        "heading_size": "h1",
-        "color_scheme": "scheme-1",
+        "heading_size": "h0",
+        "placeholder": true,
+        "enable-linkbtn": false,
+        "linkbtn-txt": "戻る",
+        "linkbtn": "",
+        "linkbtn2-txt": "戻る",
+        "linkbtn2": "",
+        "c-bd": "#dedede",
+        "c-required": "#f90000",
+        "c-required-bg": "#fff8f6",
+        "c-success-bg": "#e0f5de",
         "padding_top": 36,
         "padding_bottom": 36
       }
@@ -20,6 +86,6 @@
   },
   "order": [
     "main",
-    "form"
+    "custom_contact_form_A9AFjm"
   ]
 }

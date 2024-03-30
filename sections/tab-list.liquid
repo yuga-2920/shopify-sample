@@ -1,0 +1,593 @@
+{{ 'tab-list.css' | asset_url | stylesheet_tag }}
+{{ 'booking.css' | asset_url | stylesheet_tag }}
+
+<div class="{{ section.id }}">
+  <div class="page-width custom-wrapper__{{ section.id }}">
+    <div class="category_lists_wrap __card">
+      <ul class="category_lists card_wrap">
+        <li>
+          <div><input
+              type="radio"
+              id="category_all"
+              name="category"
+              value="all"
+              checked><label for="category_all">{{ section.settings.all }}</label>
+          </div>
+        </li>
+        {% for block in section.blocks %}
+          {%- case block.type -%}
+            {%- when 'category' -%}
+              <li>
+                <div><input
+                    type="radio"
+                    id="category_{{ section.id }}-{{ forloop.index }}"
+                    name="category"
+                    value="{{ block.settings.heading }}"><label for="category_{{ section.id }}-{{ forloop.index }}">{{ block.settings.heading }}</label>
+                </div>
+              </li>
+          {%- endcase -%}
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="menu_lists_wrap __card">
+      <ul class="menu_lists card_wrap">
+        {% for block in section.blocks %}
+          {%- case block.type -%}
+            {%- when 'menu' -%}
+              <li data-category="{{ block.settings.category }}" data-heading="{{ block.settings.heading }}">
+                <a class="list_link">
+                  <div class="menu_list_inner">
+                    <div class="menu_info">
+                      <p class="info_heading">{{ block.settings.heading }}</p>
+                      <p class="info_time">
+                        <span class="icon_wrap">
+                          <svg
+                            width="66"
+                            height="81"
+                            viewBox="0 0 66 81"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                              d="M33.1204 78.8269C50.0976 78.8269 63.8604 65.0642 63.8604 48.0869C63.8604 31.1097 50.0976 17.3469 33.1204 17.3469C16.1432 17.3469 2.3804 31.1097 2.3804 48.0869C2.3804 65.0642 16.1432 78.8269 33.1204 78.8269Z"
+                              stroke="#808080"
+                              stroke-width="3" />
+                            <path
+                              d="M40.8054 1.97693H25.4354"
+                              stroke="#808080"
+                              stroke-width="3"
+                              stroke-linecap="round"
+                              stroke-linejoin="round" />
+                            <path
+                              d="M33.1204 1.97693V17.3469"
+                              stroke="#808080"
+                              stroke-width="3"
+                              stroke-linecap="round"
+                              stroke-linejoin="round" />
+                            <path
+                              d="M54.2542 25.0319L60.0179 19.2682"
+                              stroke="#808080"
+                              stroke-width="3"
+                              stroke-linecap="round"
+                              stroke-linejoin="round" />
+                            <path
+                              d="M33.1204 48.0869V36.5594"
+                              stroke="#808080"
+                              stroke-width="3"
+                              stroke-linecap="round"
+                              stroke-linejoin="round" />
+                            <path
+                              d="M33.1204 48.0869H21.5929"
+                              stroke="#808080"
+                              stroke-width="3"
+                              stroke-linecap="round"
+                              stroke-linejoin="round" />
+                          </svg>
+                        </span>
+                        <span>{{ block.settings.time }}</span>
+                      </p>
+                    </div>
+                    <div class="menu_items">
+                      <span class="menu_tag" style="background-color: {{ block.settings.c-tag-bg }};color:{{ block.settings.c-tag-txt }};border-radius: {{ section.settings.tag-radius }}px;">{{ block.settings.tag }}</span>
+                      <span class="to_details_btn" style="background-color:{{ section.settings.c-btn-bg }};color:{{ section.settings.c-btn-txt }}; border-radius: {{ section.settings.btn-radius }}px;">{{ section.settings.btn-txt }}</span>
+                    </div>
+                  </div>
+                </a>
+              </li>
+          {%- endcase -%}
+        {% endfor %}
+      </ul>
+    </div>
+
+    {% for block in section.blocks %}
+      {%- case block.type -%}
+        {%- when 'menu' -%}
+          <div class="booking-contents">
+            <div
+              class="menu_description_wrap __card"
+              data-heading="{{ block.settings.heading }}"
+              style="display: none;">
+              <div class="card_wrap">
+                <div class="booking_details">
+                  <h2>{{ block.settings.heading }}</h2>
+                  <div>{{ block.settings.description }}</div>
+                </div>
+              </div>
+              <div class="user_selected_result">
+                {% assign datetimes = block.settings.datetime | split: ',' %}
+                <h2 class="book_list_title">{{ section.settings.title-selectDate }}</h2>
+                <ul class="book_lists_wrap">
+                  {% for datetime in datetimes %}
+                    <li class="book_list">
+                      <input
+                        type="radio"
+                        name="book_datetime"
+                        id="{{ section.id }}-{{ forloop.index }}-{{ block.settings.heading }}"
+                        class="book_check user_check"
+                        data-date="{{ datetime }}">
+                      <label class="book_info" for="{{ section.id }}-{{ forloop.index }}-{{ block.settings.heading }}">
+                        <div class="book_date">
+                          <span class="icon_wrap">
+                            <svg
+                              width="77"
+                              height="88"
+                              viewBox="0 0 77 88"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg">
+                              <path d="M25.3877 49.403H18.5261C17.394 49.403 16.4677 48.4767 16.4677 47.3445V40.483C16.4677 39.3509 17.394 38.4246 18.5261 38.4246H25.3877C26.5198 38.4246 27.4461 39.3509 27.4461 40.483V47.3445C27.4461 48.4767 26.5198 49.403 25.3877 49.403ZM43.9138 47.3445V40.483C43.9138 39.3509 42.9875 38.4246 41.8553 38.4246H34.9938C33.8616 38.4246 32.9353 39.3509 32.9353 40.483V47.3445C32.9353 48.4767 33.8616 49.403 34.9938 49.403H41.8553C42.9875 49.403 43.9138 48.4767 43.9138 47.3445ZM60.3814 47.3445V40.483C60.3814 39.3509 59.4551 38.4246 58.323 38.4246H51.4615C50.3293 38.4246 49.403 39.3509 49.403 40.483V47.3445C49.403 48.4767 50.3293 49.403 51.4615 49.403H58.323C59.4551 49.403 60.3814 48.4767 60.3814 47.3445ZM43.9138 63.8122V56.9507C43.9138 55.8185 42.9875 54.8922 41.8553 54.8922H34.9938C33.8616 54.8922 32.9353 55.8185 32.9353 56.9507V63.8122C32.9353 64.9444 33.8616 65.8707 34.9938 65.8707H41.8553C42.9875 65.8707 43.9138 64.9444 43.9138 63.8122ZM27.4461 63.8122V56.9507C27.4461 55.8185 26.5198 54.8922 25.3877 54.8922H18.5261C17.394 54.8922 16.4677 55.8185 16.4677 56.9507V63.8122C16.4677 64.9444 17.394 65.8707 18.5261 65.8707H25.3877C26.5198 65.8707 27.4461 64.9444 27.4461 63.8122ZM60.3814 63.8122V56.9507C60.3814 55.8185 59.4551 54.8922 58.323 54.8922H51.4615C50.3293 54.8922 49.403 55.8185 49.403 56.9507V63.8122C49.403 64.9444 50.3293 65.8707 51.4615 65.8707H58.323C59.4551 65.8707 60.3814 64.9444 60.3814 63.8122ZM76.8491 19.2123V79.5937C76.8491 84.1395 73.161 87.8276 68.6153 87.8276H8.23383C3.68807 87.8276 0 84.1395 0 79.5937V19.2123C0 14.6665 3.68807 10.9784 8.23383 10.9784H16.4677V2.05846C16.4677 0.926306 17.394 0 18.5261 0H25.3877C26.5198 0 27.4461 0.926306 27.4461 2.05846V10.9784H49.403V2.05846C49.403 0.926306 50.3293 0 51.4615 0H58.323C59.4551 0 60.3814 0.926306 60.3814 2.05846V10.9784H68.6153C73.161 10.9784 76.8491 14.6665 76.8491 19.2123ZM68.6153 78.5645V27.4461H8.23383V78.5645C8.23383 79.1306 8.69699 79.5937 9.26306 79.5937H67.586C68.1521 79.5937 68.6153 79.1306 68.6153 78.5645Z" fill="#808080" />
+                            </svg>
+                          </span>
+                          <span>{{ datetime }}</span>
+                        </div>
+                      </label>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+              <div
+                class="user_selected_feild"
+                id="user_selected_{{ block.settings.heading }}"
+                style="display: none;">
+                <div class="user_selected_wrap" style="border: 2px solid {{ section.settings.c-selected }};">
+                  <span class="selected_icon">
+                    <svg
+                      width="20"
+                      height="27"
+                      viewBox="0 0 20 27"
+                      fill="{{ section.settings.c-selected }}"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path d="M17.5 0H2.5C1.11927 0 0 1.11927 0 2.5V26.6667L10 20.8333L20 26.6667V2.5C20 1.11927 18.8807 0 17.5 0ZM17.5 22.3141L10 17.9391L2.5 22.3141V2.8125C2.5 2.72962 2.53292 2.65013 2.59153 2.59153C2.65013 2.53292 2.72962 2.5 2.8125 2.5H17.1875C17.3601 2.5 17.5 2.63974 17.5 2.81229V22.3141Z" fill="{{ section.settings.c-selected }}" />
+                    </svg>
+                  </span>
+                  <h3 data-selectedHeading="{{ block.settings.heading }}">{{ block.settings.heading }}</h3>
+                  <div class="user_selected_datetime book_info">
+                    <div class="book_date">
+                      <span class="icon_wrap">
+                        <svg
+                          width="77"
+                          height="88"
+                          viewBox="0 0 77 88"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg">
+                          <path d="M25.3877 49.403H18.5261C17.394 49.403 16.4677 48.4767 16.4677 47.3445V40.483C16.4677 39.3509 17.394 38.4246 18.5261 38.4246H25.3877C26.5198 38.4246 27.4461 39.3509 27.4461 40.483V47.3445C27.4461 48.4767 26.5198 49.403 25.3877 49.403ZM43.9138 47.3445V40.483C43.9138 39.3509 42.9875 38.4246 41.8553 38.4246H34.9938C33.8616 38.4246 32.9353 39.3509 32.9353 40.483V47.3445C32.9353 48.4767 33.8616 49.403 34.9938 49.403H41.8553C42.9875 49.403 43.9138 48.4767 43.9138 47.3445ZM60.3814 47.3445V40.483C60.3814 39.3509 59.4551 38.4246 58.323 38.4246H51.4615C50.3293 38.4246 49.403 39.3509 49.403 40.483V47.3445C49.403 48.4767 50.3293 49.403 51.4615 49.403H58.323C59.4551 49.403 60.3814 48.4767 60.3814 47.3445ZM43.9138 63.8122V56.9507C43.9138 55.8185 42.9875 54.8922 41.8553 54.8922H34.9938C33.8616 54.8922 32.9353 55.8185 32.9353 56.9507V63.8122C32.9353 64.9444 33.8616 65.8707 34.9938 65.8707H41.8553C42.9875 65.8707 43.9138 64.9444 43.9138 63.8122ZM27.4461 63.8122V56.9507C27.4461 55.8185 26.5198 54.8922 25.3877 54.8922H18.5261C17.394 54.8922 16.4677 55.8185 16.4677 56.9507V63.8122C16.4677 64.9444 17.394 65.8707 18.5261 65.8707H25.3877C26.5198 65.8707 27.4461 64.9444 27.4461 63.8122ZM60.3814 63.8122V56.9507C60.3814 55.8185 59.4551 54.8922 58.323 54.8922H51.4615C50.3293 54.8922 49.403 55.8185 49.403 56.9507V63.8122C49.403 64.9444 50.3293 65.8707 51.4615 65.8707H58.323C59.4551 65.8707 60.3814 64.9444 60.3814 63.8122ZM76.8491 19.2123V79.5937C76.8491 84.1395 73.161 87.8276 68.6153 87.8276H8.23383C3.68807 87.8276 0 84.1395 0 79.5937V19.2123C0 14.6665 3.68807 10.9784 8.23383 10.9784H16.4677V2.05846C16.4677 0.926306 17.394 0 18.5261 0H25.3877C26.5198 0 27.4461 0.926306 27.4461 2.05846V10.9784H49.403V2.05846C49.403 0.926306 50.3293 0 51.4615 0H58.323C59.4551 0 60.3814 0.926306 60.3814 2.05846V10.9784H68.6153C73.161 10.9784 76.8491 14.6665 76.8491 19.2123ZM68.6153 78.5645V27.4461H8.23383V78.5645C8.23383 79.1306 8.69699 79.5937 9.26306 79.5937H67.586C68.1521 79.5937 68.6153 79.1306 68.6153 78.5645Z" fill="#808080" />
+                        </svg>
+                      </span>
+                      <span class="selected_date"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="process_btn_wrap">
+                  <a
+                    href="#form"
+                    class="process_btn"
+                    style="border-radius: {{ section.settings.btn-radius }}px;background: {{ section.settings.c-btn-bg }};color: {{ section.settings.c-btn-txt }}; border: 2px solid {{ section.settings.c-selected }};">{{ section.settings.btn-txt-confirm }}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+      {%- endcase -%}
+    {% endfor %}
+  </div>
+</div>
+<div class="thanks-contents">
+  {%- form 'contact'
+    , id: 'ContactForm-custom'
+    , class: contact_form_class -%}
+    {%- if form.posted_successfully? -%}
+      <div class="thanks_wrap __card">
+        <h2
+          class="form-status form-status-list form__message"
+          tabindex="-1"
+          autofocus
+          style="padding: 1rem;margin-bottom: 2rem;background:{{ section.settings.c-success-bg }};">
+          {% render 'icon-success' %}
+          {{ 'templates.contact.form.post_success' | t }}
+        </h2>
+        <div class="thanks__button">
+          <a
+            href="{{ section.settings.linkbtn2 }}"
+            class="button"
+            style="background-color:#fff;color:currentColor;">{{ section.settings.linkbtn2-txt }}</a>
+        </div>
+      </div>
+    {%- endif -%}
+  {%- endform -%}
+</div>
+
+<style>
+  .custom-wrapper__{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background-color: {{ section.settings.background_color }};
+  }
+  .{{ section.id }}.category_lists input[type=radio]:checked + label {
+    background-color: {{ section.settings.c-checked }};
+  }
+  .{{ section.id }}.list_link:hover,
+  .{{ section.id }}.category_lists li:hover {
+    background-color: {{ section.settings.c-hover }};
+  }
+
+  .{{ section.id }}.booking-contents .book_list input[type=radio] + label:before {
+    border: 1px solid{{ section.settings.c-selected }};
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    let categoryButtons = document.querySelectorAll('input[type="radio"][name="category"]');
+    categoryButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            let selectedCategory = this.value;
+            let menuItems = document.querySelectorAll('.menu_lists li');
+            if (selectedCategory === 'all') {
+                // 「全て表示」が選択された場合、全ての項目を表示
+                menuItems.forEach(function(item) {
+                    item.style.display = 'block';
+                });
+            } else {
+                // 特定のカテゴリが選択された場合、そのカテゴリに合う項目のみを表示
+                menuItems.forEach(function(item) {
+                    let itemCategories = item.getAttribute('data-category').split(' ');
+                    if (itemCategories.includes(selectedCategory)) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            }
+
+            let scrollTarget = document.querySelector('.menu_lists_wrap.__card');
+            let scrollPosition = scrollTarget.getBoundingClientRect().top + window.scrollY - 100;
+            window.scrollTo({ top: scrollPosition, behavior: 'smooth' });
+        });
+    });
+
+    let listItems = document.querySelectorAll('.menu_lists li');
+    listItems.forEach(function(listItem) {
+        listItem.addEventListener('click', function() {
+            let selectedHeading = this.getAttribute('data-heading');
+            let descriptionDivs = document.querySelectorAll('.menu_description_wrap.__card');
+            descriptionDivs.forEach(function(div) {
+                if (div.getAttribute('data-heading') === selectedHeading) {
+                    div.style.display = 'block';
+                    div.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                } else {
+                    div.style.display = 'none';
+                }
+            });
+        });
+    });
+
+    let observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                let descriptionDivs = document.querySelectorAll('.menu_description_wrap.__card');
+                let contactCustomContent = document.querySelector('.contact-custom');
+
+                descriptionDivs.forEach(function(div) {
+                    div.style.display = 'none';
+                });
+
+                if (contactCustomContent) {
+                    contactCustomContent.style.display = 'none';
+                }
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+
+    let categoryListsWrap = document.querySelector('.category_lists_wrap.__card');
+    observer.observe(categoryListsWrap);
+  });
+
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    let urlParams = new URLSearchParams(window.location.search);
+    let radioButtons = document.querySelectorAll('.book_check');
+    let lastClicked = null;
+    let contactCustomContent = document.querySelector('.contact-custom');
+    let userSelectedWrap = document.querySelector('.user_selected_feild');
+    let processButtons = document.querySelectorAll('.process_btn');
+    let desiredDateTimeField = document.getElementById('desiredDateTime');
+    let desiredEventField = document.getElementById('desiredEvent');
+    let form = document.getElementById('form');
+
+    if (urlParams.get('contact_posted') === 'true') {
+        form.style.display = 'block';
+    }
+
+    radioButtons.forEach(function(radio) {
+        radio.addEventListener('click', function() {
+            // ラジオボタンが前回クリックされたものと同じ場合、選択を解除
+            if (lastClicked === radio && radio.checked) {
+                radio.checked = false;
+                lastClicked = null;
+
+                // 選択が解除されたので、表示内容もクリア
+                let heading = radio.id.split('-').pop(); // ラジオボタンのIDから見出しを取得
+                let userSelectedField = document.getElementById('user_selected_' + heading);
+                userSelectedField.style.display = 'none'; // user_selected_feildを非表示にする
+                if (contactCustomContent) {
+                    contactCustomContent.style.display = 'none';
+                }
+            } else {
+                lastClicked = radio;
+
+                userSelectedField.style.display = 'block';
+                if (contactCustomContent) {
+                    contactCustomContent.style.display = 'block';
+                }
+            }
+        });
+
+        radio.addEventListener('change', function() {
+          if (radio.checked) {
+
+                // 対応するuser_selected_feildを特定する
+                let heading = radio.id.split('-').pop(); // ラジオボタンのIDから見出しを取得
+                let userSelectedField = document.getElementById('user_selected_' + heading);
+
+                // その他のuser_selected_feildを非表示にする
+                document.querySelectorAll('.user_selected_feild').forEach(function(field) {
+                    field.style.display = 'none';
+                });
+
+                // 選択された日時を表示
+                let selectedDate = radio.getAttribute('data-date');
+                userSelectedField.querySelector('.selected_date').textContent = selectedDate;
+
+                // 対応するuser_selected_feildを表示する
+                userSelectedField.style.display = 'block';
+            }
+        });
+    });
+
+    processButtons.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          let userSelectedField = btn.closest('.user_selected_feild');
+
+          let selectedHeading = userSelectedField.querySelector('h3').getAttribute('data-selectedHeading');
+          desiredEventField.value = selectedHeading;
+
+          let selectedDate = userSelectedField.querySelector('.selected_date').textContent;
+          desiredDateTimeField.value = selectedDate;
+
+          // フォームを表示
+          let form = document.getElementById('form');
+          form.style.display = 'block';
+
+          // フォームへのスクロール
+          form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    });
+  });
+</script>
+
+
+{% schema %}
+  {
+    "name": "タブ出し分け",
+    "tag": "section",
+    "class": "section tab-lists",
+    "disabled_on": {
+      "groups": ["header", "footer"]
+    },
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:sections.all.padding.section_padding_heading"
+      },
+      {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "t:sections.all.padding.padding_top",
+        "default": 36
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "t:sections.all.padding.padding_bottom",
+        "default": 36
+      },
+      {
+        "type": "header",
+        "content": "-- セクション基本設定 --"
+      }, {
+        "type": "text",
+        "id": "all",
+        "label": "カテゴリリストトップのテキスト",
+        "default": "全て表示",
+        "info": "全てのメニュー表示。デフォルト。"
+      }, {
+        "type": "text",
+        "id": "title-selectDate",
+        "label": "日付選択エリアの見出し",
+        "default": "ご希望日時を選択して下さい"
+      }, {
+        "type": "header",
+        "content": "-- ボタン共通 --"
+      }, {
+        "type": "text",
+        "id": "btn-txt",
+        "label": "ボタンテキスト(詳細表示)",
+        "default": "詳細を見る"
+      }, {
+        "type": "text",
+        "id": "btn-txt-confirm",
+        "label": "ボタンテキスト(予約ボタン)",
+        "default": "予約する"
+      }, {
+        "type": "range",
+        "id": "btn-radius",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "ボタンの形",
+        "default": 25
+      }, {
+        "type": "color",
+        "id": "c-btn-bg",
+        "label": "ボタン背景カラー",
+        "default": "#4CAF50"
+      }, {
+        "type": "color",
+        "id": "c-btn-txt",
+        "label": "ボタンテキストカラー",
+        "default": "#fff"
+      }, {
+        "type": "header",
+        "content": "-- カラー --"
+      }, {
+        "type": "color",
+        "id": "c-checked",
+        "label": "カテゴリ選択時の背景",
+        "default": "#4CAF50"
+      }, {
+        "type": "color",
+        "id": "c-hover",
+        "label": "リストホバー時の背景",
+        "default": "#e7f5f2"
+      }, {
+        "type": "color",
+        "id": "c-selected",
+        "label": "選択日付表示エリアのボーダー&ボタン",
+        "default": "#4abaa7"
+      }, {
+        "type": "header",
+        "content": "-- タグ共通 --"
+      }, {
+        "type": "range",
+        "id": "tag-radius",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "タグの形",
+        "default": 4
+      }, {
+        "type": "paragraph",
+        "content": "タグのカラーは各ブロック内で設定"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "category",
+        "name": "カテゴリー",
+        "settings": [
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "カテゴリー名",
+            "default": "LINEマーケティングセミナー"
+          }
+        ]
+      }, {
+        "type": "menu",
+        "name": "メニュー",
+        "settings": [
+          {
+            "type": "header",
+            "content": "-- メイン --"
+          },
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "メニュー名",
+            "default": "ビギナー向けセミナー"
+          },
+          {
+            "type": "text",
+            "id": "category",
+            "label": "振り分けたいカテゴリー名を入力",
+            "default": "LINEマーケティングセミナー ビギナー向けセミナー",
+            "info": "複数ある場合は半角スペースで追加"
+          },
+          {
+            "type": "text",
+            "id": "time",
+            "label": "所要時間",
+            "default": "40分"
+          }, {
+            "type": "text",
+            "id": "tag",
+            "label": "タグ",
+            "default": "抽選制"
+          }, {
+            "type": "color",
+            "id": "c-tag-bg",
+            "label": "タグ背景カラー",
+            "default": "#ffcf71"
+          }, {
+            "type": "color",
+            "id": "c-tag-txt",
+            "label": "タグテキストカラー",
+            "default": "#000"
+          }, {
+            "type": "header",
+            "content": "-- 詳細 --"
+          }, {
+            "type": "richtext",
+            "id": "description",
+            "label": "説明文",
+            "default": "<p>詳細が入ります詳細が入ります詳細が入ります詳細が入ります詳細が入ります</p>"
+          }, {
+            "type": "html",
+            "id": "datetime",
+            "label": "日時",
+            "default": "2024年01月05日(金) 10:00~10:30,2024年01月06日(土) 10:00~10:30"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "タブ出し分け",
+        "blocks": [
+          {
+            "type": "category"
+          }, {
+            "type": "menu"
+          },
+          {
+            "type": "category"
+          }, {
+            "type": "menu"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

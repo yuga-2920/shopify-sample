@@ -1,0 +1,754 @@
+{{ 'custom-contact-form.css' | asset_url | stylesheet_tag }}
+
+<div class="{{ section.id }} color-{{ section.settings.color_scheme }} gradient">
+  <div class="contact page-width page-width--narrow custom-wrapper__{{ section.id }}">
+    <div class="form-wrap">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="title title-wrapper--no-top-margin inline-richtext {{ section.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+          {{ section.settings.heading }}
+        </h2>
+      {%- endif -%}
+      {%- liquid
+        assign contact_form_class = 'isolate'
+        if settings.animations_reveal_on_scroll
+          assign contact_form_class = 'isolate scroll-trigger animate--slide-in'
+        endif
+      -%}
+      {%- form 'contact'
+        , id: 'ContactForm-custom'
+        , class: contact_form_class -%}
+
+        <div>
+          {% for block in section.blocks %}
+            {%- case block.type -%}
+              {%- when 'name' -%}
+                <div class="form-group">
+                  <label for="ContactForm-custom-name">{{ 'templates.contact.form.name' | t }}
+                    {% if block.settings.required == true %}
+                      <span aria-hidden="true">*</span>
+                    {% endif %}
+                  </label>
+                  <input
+                    autocomplete="name"
+                    type="text"
+                    id="ContactForm-custom-name"
+                    name="contact[{{ 'templates.contact.form.name' | t }}]"
+                    value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+                    {% if block.settings.required %}
+                    required
+                    {% endif %}
+                    {% if section.settings.placeholder %}
+                    placeholder="{{ 'templates.contact.form.name' | t }}"
+                    {% endif %}>
+                </div>
+                {% if block.settings.kana == true %}
+                  <div class="form-group">
+                    <label for="ContactForm-custom-kana">フリガナ
+                      {% if block.settings.required %}
+                        <span aria-hidden="true">*</span>
+                      {% endif %}
+                      <span
+                        id="kana-error"
+                        class="input-error"
+                        style="color:{{ section.settings.c-required }};">
+                        {{ block.settings.confirm-error }}
+                      </span>
+                    </label>
+                    <input
+                      type="text"
+                      id="ContactForm-custom-kana"
+                      name="contact[フリガナ]"
+                      value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+                      {% if block.settings.required %}
+                      required
+                      {% endif %}
+                      {% if section.settings.placeholder %}
+                      placeholder="フリガナ"
+                      {% endif %}>
+                  </div>
+                {% endif %}
+
+              {%- when 'email' -%}
+                <div class="form-group">
+                  <label for="ContactForm-custom-email">
+                    {{- 'templates.contact.form.email' | t }}
+                    <span aria-hidden="true">*</span>
+                  </label>
+                  <input
+                    autocomplete="email"
+                    type="email"
+                    id="ContactForm-custom-email"
+                    name="contact[email]"
+                    spellcheck="false"
+                    autocapitalize="off"
+                    value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                    aria-required="true"
+                    required
+                    {% if form.errors contains 'email' %}
+                    aria-invalid="true"
+                    aria-describedby="ContactForm-custom-email-error"
+                    {% endif %}
+                    {% if section.settings.placeholder %}
+                    placeholder="{{ 'templates.contact.form.email' | t }}"
+                    {% endif %}>
+                </div>
+                {% if block.settings.confirm-email %}
+                  <div class="form-group">
+                    <label for="ContactForm-custom-email-confirm">
+                      {{ block.settings.confirm-label }}
+                      <span aria-hidden="true">*</span>
+                      <span
+                        id="email-error"
+                        class="input-error"
+                        style="color:{{ section.settings.c-required }};">
+                        {{ block.settings.confirm-error }}
+                      </span>
+                    </label>
+                    <input
+                      autocomplete="email"
+                      type="email"
+                      id="ContactForm-custom-email-confirm"
+                      name="contact[email_confirm]"
+                      required
+                      {% if section.settings.placeholder %}
+                      placeholder="{{ block.settings.confirm-label }}"
+                      {% endif %}>
+                  </div>
+                {% endif %}
+
+              {%- when 'tell' -%}
+                <div class="form-group">
+                  <label for="ContactForm-custom-phone">{{ 'templates.contact.form.phone' | t }}
+                    {% if block.settings.required %}
+                      <span aria-hidden="true">*</span>
+                    {% endif %}
+                  </label>
+                  <input
+                    type="tel"
+                    id="ContactForm-custom-phone"
+                    {% if block.settings.required %}
+                    required
+                    {% endif %}
+                    autocomplete="tel"
+                    name="contact[{{ 'templates.contact.form.phone' | t }}]"
+                    pattern="[0-9\-]*"
+                    value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
+                    {% if section.settings.placeholder %}
+                    placeholder="{{ 'templates.contact.form.phone' | t }}"
+                    {% endif %}>
+                </div>
+
+              {%- when 'comment' -%}
+                <div class="form-group">
+                  <label for="ContactForm-custom-body">
+                    {{- 'templates.contact.form.comment' | t -}}
+                    {% if block.settings.required %}
+                      <span aria-hidden="true">*</span>
+                    {% endif %}
+                  </label>
+                  <textarea
+                    rows="10"
+                    id="ContactForm-custom-body"
+                    name="contact[{{ 'templates.contact.form.comment' | t }}]"
+                    {% if section.settings.placeholder %}
+                    placeholder="{{ 'templates.contact.form.comment' | t }}"
+                    {% endif %}
+                    {% if block.settings.required %}
+                    required
+                    {% endif %}>
+                    {{- form.body -}}
+                  </textarea>
+                </div>
+
+              {%- when 'text' -%}
+                <div class="form-group">
+                  <label for="CustomForm-custom-text__{{ section.id }}-{{ forloop.index }}">{{ block.settings.label }}
+                    {% if block.settings.required %}
+                      <span aria-hidden="true">*</span>
+                    {% endif %}
+                  </label>
+                  <input
+                    type="text"
+                    id="CustomForm-custom-text__{{ section.id }}-{{ forloop.index }}"
+                    name="contact[{{ block.settings.label }}]"
+                    {% if section.settings.placeholder %}
+                    placeholder="{{ block.settings.label }}"
+                    {% endif %}
+                    {% if block.settings.required %}
+                    required
+                    {% endif %}>
+                </div>
+
+              {%- when 'select' -%}
+                {% assign options = block.settings.options | split: ',' %}
+
+                <div class="form-group">
+                  <label for="CustomForm-select__{{ section.id }}-{{ forloop.index }}">{{ block.settings.label }}
+                    {% if block.settings.required %}
+                      <span aria-hidden="true">*</span>
+                    {% endif %}
+                  </label>
+                  <select
+                    class="custom-select"
+                    type="text"
+                    id="CustomForm-select__{{ section.id }}-{{ forloop.index }}"
+                    name="contact[{{ block.settings.label }}]"
+                    {% if section.settings.placeholder %}
+                    placeholder="{{ block.settings.label }}"
+                    {% endif %}
+                    {% if block.settings.required %}
+                    required
+                    {% endif %}>
+                    <option value="">{{ block.settings.select-default }}</option>
+                    {% for option in options %}
+                      <option value="{{ option }}">{{ option }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+
+              {%- when 'radio' -%}
+                {% assign options = block.settings.options | split: ',' %}
+
+                <div class="form-group">
+                  <label class="form-label">{{ block.settings.label }}
+                    {% if block.settings.required %}
+                      <span aria-hidden="true">*</span>
+                    {% endif %}
+                  </label>
+                  <div class="radio-group">
+                    {% for option in options %}
+                      <div class="radio-option">
+                        <input
+                          type="radio"
+                          id="CustomForm-radio__{{ section.id }}-{{ forloop.index }}"
+                          name="contact[{{ block.settings.label }}]"
+                          value="{{ option }}"
+                          {% if block.settings.required %}
+                          required
+                          {% endif %}>
+                        <label for="CustomForm-radio__{{ section.id }}-{{ forloop.index }}">{{ option }}</label>
+                      </div>
+                    {% endfor %}
+                  </div>
+                </div>
+
+              {%- when 'html' -%}
+                <div>{{ block.settings.html }}</div>
+
+              {%- when 'policy' -%}
+                {% case block.settings.select-policy %}
+                  {% when 'privacy_policy' %}
+                    {% assign policyTitle = shop.privacy_policy.title %}
+                    {% assign policyBody = shop.privacy_policy.body %}
+                  {% when 'refund_policy' %}
+                    {% assign policyTitle = shop.refund_policy.title %}
+                    {% assign policyBody = shop.refund_policy.body %}
+                  {% else %}
+                    {% assign policyTitle = shop.terms_of_service.title %}
+                    {% assign policyBody = shop.terms_of_service.body %}
+                {% endcase %}
+                <div class="policy-contents">
+                  {% if block.settings.enable %}
+                    <h3 class="policy_title">{{ policyTitle }}</h3>
+                    <div class="policy_body">{{ policyBody }}</div>
+                  {% endif %}
+
+                  <div class="agree_wrap">
+                    <input
+                      id="agree"
+                      type="checkbox"
+                      required><label for="CustomForm-agree__{{ section.id }}-{{ forloop.index }}">{{ block.settings.text }}</label>
+                  </div>
+                </div>
+
+            {%- endcase -%}
+          {% endfor %}
+        </div>
+
+        <div class="contact__button">
+          {% if section.settings.enable-linkbtn %}
+            <a
+              href="{{ section.settings.linkbtn }}"
+              class="button"
+              style="background-color:#fff;color:currentColor;">{{ section.settings.linkbtn-txt }}</a>
+          {% endif %}
+          <button
+            type="submit"
+            id="btn_custom_form"
+            class="button">
+            {{ 'templates.contact.form.send' | t }}
+          </button>
+        </div>
+      {%- endform -%}
+    </div>
+  </div>
+</div>
+<div class="thanks-contents">
+  {%- form 'contact'
+    , id: 'ContactForm-custom'
+    , class: contact_form_class -%}
+    {%- if form.posted_successfully? -%}
+      <div class="thanks_wrap __card">
+        <h2
+          class="form-status form-status-list form__message"
+          tabindex="-1"
+          autofocus
+          style="padding: 1rem;margin-bottom: 2rem;background:{{ section.settings.c-success-bg }};">
+          {% render 'icon-success' %}
+          {{ 'templates.contact.form.post_success' | t }}
+        </h2>
+        <div class="thanks__button">
+          <a
+            href="{{ section.settings.linkbtn2 }}"
+            class="button"
+            style="background-color:#fff;color:currentColor;">{{ section.settings.linkbtn2-txt }}</a>
+        </div>
+      </div>
+    {%- endif -%}
+  {%- endform -%}
+</div>
+
+<style>
+  .custom-wrapper__{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  .{{ section.id }}
+  .form-group span {
+    color: {{ section.settings.c-required }};
+    font-size: 2rem;
+  }
+  .{{ section.id }}
+  .form-status-list {
+    background: {{ section.settings.c-success-bg }};
+    padding: 1rem;
+  }
+  .{{ section.id }} input: not([type="radio"]),
+  .{{ section.id }} textarea,
+  .{{ section.id }} select,
+  .{{ section.id }} .policy_body {
+    border: 1px solid {{ section.settings.c-bd }};
+  }
+</style>
+
+<script>
+  // カナ文字のバリデーション
+  function validateKana(value) {
+    const kanaPattern = /^[ァ-ヶー　]+$/;
+    return kanaPattern.test(value.value) || value.value.trim() === '';
+  }
+
+  // メールアドレスの一致をチェック
+  function checkEmailMatch(email1, email2) {
+    return email1.value === email2.value;
+  }
+
+  // 必須フィールドのチェック
+  function checkRequiredFields(agreeCheckbox) {
+    let isAllValid = true;
+
+    // 通常の入力フィールドのチェック
+    contactForm.querySelectorAll('[required]:not([type="radio"])').forEach(function(field) {
+      if (field && !field.value.trim()) {
+        isAllValid = false;
+      }
+    });
+
+    // ラジオボタンのチェック
+    const radioGroups = contactForm.querySelectorAll('.radio-group');
+    radioGroups.forEach(function(group) {
+      const radioButtons = Array.from(group.querySelectorAll('input[type="radio"][required]'));
+      if (radioButtons.length > 0) {
+        const isAnyRadioButtonChecked = radioButtons.some(item => item.checked);
+        if (!isAnyRadioButtonChecked) {
+          isAllValid = false;
+        }
+      }
+    });
+
+    if (agreeCheckbox && !agreeCheckbox.checked) {
+      isAllValid = false;
+    }
+
+    return isAllValid;
+  }
+
+  // 背景色の更新
+  function updateFieldBackground(contactForm) {
+    contactForm.querySelectorAll('input[required], textarea[required], select[required]').forEach(function(field) {
+      field.style.backgroundColor = field.value.trim() === '' ? '{{ section.settings.c-required-bg }}' : 'transparent';
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    const contactForm = document.getElementById('ContactForm-custom');
+    const emailInput = document.getElementById('ContactForm-custom-email');
+    const emailConfirmInput = document.getElementById('ContactForm-custom-email-confirm');
+    const emailErrorDiv = document.getElementById('email-error');
+    const submitButton = document.getElementById('btn_custom_form');
+    const kanaInput = document.getElementById('ContactForm-custom-kana');
+    const kanaErrorDiv = document.getElementById('kana-error');
+    const agreeCheckbox = document.getElementById('agree');
+
+    // フォームの更新
+    function updateFormState() {
+      updateFieldBackground(contactForm);
+      const isEmailMatching = !emailConfirmInput || checkEmailMatch(emailConfirmInput, emailConfirmInput);
+      const isRequiredFieldsFilled = checkRequiredFields(agreeCheckbox);
+      const isKanaValid = !kanaInput || validateKana(kanaInput);
+
+      submitButton.disabled = !(isEmailMatching && isRequiredFieldsFilled);
+
+      if (emailErrorDiv) {
+          emailErrorDiv.style.display = isEmailMatching ? 'none' : 'block';
+      }
+      if (kanaErrorDiv) {
+          kanaErrorDiv.style.display = isKanaValid ? 'none' : 'block';
+      }
+      submitButton.disabled = !(isEmailMatching && isRequiredFieldsFilled && isKanaValid);
+    }
+
+    // フォームを入力した時に発火させる
+    contactForm.addEventListener('input', function() {
+      updateFormState();
+      updateFieldBackground(contactForm);
+    });
+
+    // 初回の発火
+    updateFormState();
+    updateFieldBackground(contactForm);
+  });
+
+</script>
+
+
+{% schema %}
+  {
+    "name": "オリジナル お問い合わせフォーム",
+    "tag": "section",
+    "class": "section custom-contact",
+    "limit": 1,
+    "disabled_on": {
+      "groups": ["header", "footer"]
+    },
+    "settings": [
+      {
+        "type": "color_scheme",
+        "id": "color_scheme",
+        "label": "t:sections.all.colors.label",
+        "default": "background-1"
+      },
+      {
+        "type": "inline_richtext",
+        "id": "heading",
+        "default": "お問い合わせ",
+        "label": "ヘッダーテキスト"
+      },
+      {
+        "type": "select",
+        "id": "heading_size",
+        "options": [
+          {
+            "value": "h2",
+            "label": "t:sections.all.heading_size.options__1.label"
+          }, {
+            "value": "h1",
+            "label": "t:sections.all.heading_size.options__2.label"
+          }, {
+            "value": "h0",
+            "label": "t:sections.all.heading_size.options__3.label"
+          }
+        ],
+        "default": "h1",
+        "label": "t:sections.all.heading_size.label"
+      },
+      {
+        "type": "checkbox",
+        "id": "placeholder",
+        "label": "プレースホルダー表示",
+        "default": true,
+        "info": "全ての入力欄に適用されます"
+      }, {
+        "type": "header",
+        "content": "ボタン追加",
+        "info": "送信ボタンとは別のボタンを設置"
+      }, {
+        "type": "checkbox",
+        "id": "enable-linkbtn",
+        "label": "ボタン追加",
+        "default": true
+      }, {
+        "type": "text",
+        "id": "linkbtn-txt",
+        "label": "ボタンテキスト",
+        "default": "戻る"
+      }, {
+        "type": "url",
+        "id": "linkbtn",
+        "label": "リンク先"
+      }, {
+        "type": "header",
+        "content": "送信完了後のテキスト",
+        "info": "送信完了後に表示されるボタン"
+      }, {
+        "type": "text",
+        "id": "linkbtn2-txt",
+        "label": "ボタンテキスト",
+        "default": "戻る"
+      }, {
+        "type": "url",
+        "id": "linkbtn2",
+        "label": "リンク先"
+      }, {
+        "type": "header",
+        "content": "カラー"
+      }, {
+        "type": "color",
+        "id": "c-bd",
+        "label": "入力欄のボーダー",
+        "default": "#dedede"
+      }, {
+        "type": "color",
+        "id": "c-required",
+        "label": "必須※",
+        "default": "#f90000"
+      }, {
+        "type": "color",
+        "id": "c-required-bg",
+        "label": "必須項目入力欄の背景",
+        "default": "#fff8f6",
+        "info": "各種必須を有効にしている場合、入力欄が未入力の場合に背景カラーが反映されます。入力すると透明。"
+      }, {
+        "type": "color",
+        "id": "c-success-bg",
+        "label": "送信完了後テキスト表示背景",
+        "default": "#e0f5de"
+      }, {
+        "type": "header",
+        "content": "t:sections.all.padding.section_padding_heading"
+      }, {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "t:sections.all.padding.padding_top",
+        "default": 36
+      }, {
+        "type": "range",
+        "id": "padding_bottom",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "t:sections.all.padding.padding_bottom",
+        "default": 36
+      }
+    ],
+    "blocks": [
+      {
+        "type": "name",
+        "name": "名前",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "checkbox",
+            "id": "kana",
+            "label": "フリガナ入力エリアを追加する",
+            "default": false
+          }, {
+            "type": "text",
+            "id": "confirm-error",
+            "label": "フリガナエラーメッセージ",
+            "default": "カタカナで入力してください",
+            "info": "カタカナ以外の場合に表示"
+          }, {
+            "type": "checkbox",
+            "id": "required",
+            "label": "必須",
+            "default": false
+          }
+        ]
+      },
+      {
+        "type": "email",
+        "name": "メール",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "paragraph",
+            "content": "メールは必須"
+          }, {
+            "type": "checkbox",
+            "id": "confirm-email",
+            "label": "確認用入力欄を追加する",
+            "default": false
+          }, {
+            "type": "text",
+            "id": "confirm-label",
+            "label": "確認用メールラベル",
+            "default": "確認用メールアドレス"
+          }, {
+            "type": "text",
+            "id": "confirm-error",
+            "label": "確認用メールエラーメッセージ",
+            "default": "メールアドレスが一致しません"
+          }
+        ]
+      },
+      {
+        "type": "tell",
+        "name": "TEL",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "checkbox",
+            "id": "required",
+            "label": "必須",
+            "default": false
+          }
+        ]
+      },
+      {
+        "type": "comment",
+        "name": "コメント",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "checkbox",
+            "id": "required",
+            "label": "必須",
+            "default": false
+          }
+        ]
+      }, {
+        "type": "text",
+        "name": "テキスト",
+        "settings": [
+          {
+            "type": "text",
+            "id": "label",
+            "label": "ラベル",
+            "default": "ラベル"
+          }, {
+            "type": "checkbox",
+            "id": "required",
+            "label": "必須",
+            "default": false
+          }
+        ]
+      }, {
+        "type": "select",
+        "name": "選択",
+        "settings": [
+          {
+            "type": "text",
+            "id": "label",
+            "label": "ラベル",
+            "default": "ラベル"
+          }, {
+            "type": "text",
+            "id": "select-default",
+            "label": "デフォルト選択項目の文言",
+            "default": "選択してください"
+          }, {
+            "type": "textarea",
+            "id": "options",
+            "label": "選択項目",
+            "default": "項目１,項目2",
+            "info": "半角カンマで区切ってください"
+          }, {
+            "type": "checkbox",
+            "id": "required",
+            "label": "必須",
+            "default": false
+          }
+        ]
+      }, {
+        "type": "radio",
+        "name": "ラジオボタン",
+        "settings": [
+          {
+            "type": "text",
+            "id": "label",
+            "label": "ラベル",
+            "default": "ラベル"
+          }, {
+            "type": "textarea",
+            "id": "options",
+            "label": "選択項目",
+            "default": "項目１,項目2",
+            "info": "半角カンマで区切ってください"
+          }, {
+            "type": "checkbox",
+            "id": "required",
+            "label": "必須",
+            "default": false
+          }
+        ]
+      }, {
+        "type": "html",
+        "name": "HTML",
+        "settings": [
+          {
+            "type": "html",
+            "id": "html",
+            "label": "コードを入力",
+            "info": "HTMLタグで何か挿入したいときに使用してください"
+          }
+        ]
+      }, {
+        "type": "policy",
+        "name": "ポリシー",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "checkbox",
+            "id": "enable",
+            "label": "規約内容表示",
+            "default": true,
+            "info": "設定のポリシーの内容が反映されます。"
+          }, {
+            "type": "select",
+            "id": "select-policy",
+            "options": [
+              {
+                "value": "privacy_policy",
+                "label": "プライバシーポリシー"
+              }, {
+                "value": "refund_policy",
+                "label": "返金ポリシー"
+              }, {
+                "value": "terms_of_service",
+                "label": "利用規約"
+              }
+            ],
+            "default": "privacy_policy",
+            "label": "ポリシーを選択"
+          }, {
+            "type": "inline_richtext",
+            "id": "text",
+            "label": "ポリシー同意",
+            "default": "同意する",
+            "info": "固定で必須になります"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "オリジナル お問い合わせフォーム",
+        "blocks": [
+          {
+            "type": "name"
+          }, {
+            "type": "email"
+          }, {
+            "type": "comment"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
