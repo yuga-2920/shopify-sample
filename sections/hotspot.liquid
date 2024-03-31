@@ -1,0 +1,253 @@
+{{ 'hotspot.css' | asset_url | stylesheet_tag }}
+
+<div class="hot-spot {{ section.id }}">
+  <div class="image-hotspot small-hide">
+    <img
+      src="{{ section.settings.image | image_url: height: 800 }}"
+      loading="lazy"
+      alt="{{ section.settings.image.alt | escape }}">
+  </div>
+
+  {% comment %} large-up-hide medium-hideでの表示の切り替え {% endcomment %}
+  <div class="image-hotspot large-up-hide medium-hide">
+    <img
+      src="{{ section.settings.image-sp | image_url: height: 400 }}"
+      loading="lazy"
+      alt="{{ section.settings.image-sp.alt | escape }}">
+  </div>
+
+  {% for block in section.blocks %}
+    {%- assign product = block.settings.product -%}
+    <div class="item small-hide" style="top: {{ block.settings.dot-top }}vw;left: {{ block.settings.dot-left }}vw;">
+      <input
+        type="checkbox"
+        class="tooltip-icon"
+        id="item-PC__{{ section.id }}-{{ forloop.index }}"
+        name="point"
+      >
+      <label for="item-PC__{{ section.id }}-{{ forloop.index }}" class="icon2">
+        <div class="tooltip-contents">
+          <a href="{{ product.url }}" style="top: {{ block.settings.tltip-top }}vw;left: {{ block.settings.tltip-left }}vw;">
+            <div class="hotspot__tooltip-inner" style="background: {{ section.settings.c-bk }};">
+              <div class="hotspot__tooltip-image-wrapper">
+                <img
+                  src="{{ product.featured_image | image_url: height: 200 }}"
+                  alt="{{ product.featured_image.alt | escape }}"
+                  loading="lazy">
+              </div>
+              <div class="hotspot__tooltip-txt-wrapper" style="color: {{ section.settings.c-txt }};">
+                <h3 style="color: {{ section.settings.c-txt }};">{{ product.title }}</h3>
+                <p>{{ product.price | money }}</p>
+                <p class="viewmore">{{ section.settings.link-txt }}</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </label>
+    </div>
+
+    {% comment %} large-up-hide medium-hideでの表示の切り替え {% endcomment %}
+    <div class="item large-up-hide medium-hide" style="top: {{ block.settings.dot-topSP }}vw;left: {{ block.settings.dot-leftSP }}vw;">
+      <input
+        type="checkbox"
+        class="tooltip-icon"
+        id="item-SP__{{ section.id }}-{{ forloop.index }}"
+        name="point">
+      <label for="item-SP__{{ section.id }}-{{ forloop.index }}" class="icon2">
+        <div class="tooltip-contents">
+          <a href="{{ product.url }}" style="top: {{ block.settings.tltip-topSP }}vw;left: {{ block.settings.tltip-leftSP }}vw;">
+            <div class="hotspot__tooltip-inner" style="background: {{ section.settings.c-bk }};">
+              <div class="hotspot__tooltip-image-wrapper">
+                <img
+                  src="{{ product.featured_image | image_url: height: 200 }}"
+                  alt="{{ product.featured_image.alt | escape }}"
+                  loading="lazy">
+              </div>
+              <div class="hotspot__tooltip-txt-wrapper" style="color: {{ section.settings.c-txt }};">
+                <h3 style="color: {{ section.settings.c-txt }};">{{ product.title }}</h3>
+                <p>{{ product.price | money }}</p>
+                <p class="viewmore">{{ section.settings.link-txt }}</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </label>
+    </div>
+  {% endfor %}
+</div>
+
+<style>
+  .image-hotspot {
+    height: {{ section.settings.image-h }}vh;
+  }
+  .hot-spot .icon2:before {
+    border: 3px solid{{ section.settings.c-border }};
+    background: {{ section.settings.c-btn }};
+  }
+  .hot-spot .icon2:after {
+    border: 1px solid{{ section.settings.c-border2 }};
+  }
+  @media screen and (max-width: 749px) {
+    .image-hotspot {
+      height: {{ section.settings.image-h-sp }}vh;
+    }
+  }
+</style>
+
+
+{% schema %}
+  {
+    "name": "ホットスポット",
+    "tag": "section",
+    "class": "section",
+    "disabled_on": {
+      "groups": ["header", "footer"]
+    },
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "-- PC --"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "画像　PC"
+      },
+      {
+        "type": "number",
+        "id": "image-h",
+        "label": "画像高さ",
+        "default": 800
+      },
+      {
+        "type": "paragraph",
+        "content": "-- スマホ --"
+      }, {
+        "type": "image_picker",
+        "id": "image-sp",
+        "label": "画像　スマホ"
+      }, {
+        "type": "number",
+        "id": "image-h-sp",
+        "label": "画像高さ",
+        "default": 80
+      },
+      {
+        "type": "paragraph",
+        "content": "-- 共通 --"
+      },
+      {
+        "type": "header",
+        "content": "ボタンカラー"
+      }, {
+        "type": "color",
+        "id": "c-btn",
+        "label": "ボタンメインカラー",
+        "default": "#8e44ad"
+      }, {
+        "type": "color",
+        "id": "c-border",
+        "label": "ボタンボーダーカラー",
+        "default": "#fff"
+      }, {
+        "type": "color",
+        "id": "c-border2",
+        "label": "ボタン周りのカラー",
+        "default": "#8e44ad"
+      }, {
+        "type": "header",
+        "content": "ツールチップ"
+      }, {
+        "type": "text",
+        "id": "link-txt",
+        "label": "もっと見るのテキスト",
+        "default": "view more >"
+      }, {
+        "type": "color",
+        "id": "c-txt",
+        "label": "文字カラー",
+        "info": "タイトル以外は透過になります。",
+        "default": "#000"
+      }, {
+        "type": "color",
+        "id": "c-bk",
+        "label": "ツールチップ背景カラー",
+        "default": "#fff"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "spot",
+        "name": "コンテンツ",
+        "settings": [
+          {
+            "type": "product",
+            "id": "product",
+            "label": "t:sections.featured-product.settings.product.label"
+          },
+          {
+            "type": "number",
+            "id": "dot-top",
+            "label": "上からの位置",
+            "default": 30
+          },
+          {
+            "type": "number",
+            "id": "dot-left",
+            "label": "左からの位置",
+            "default": 20
+          },
+          {
+            "type": "paragraph",
+            "content": "-- スマホ --"
+          }, {
+            "type": "number",
+            "id": "dot-topSP",
+            "label": "上からの位置",
+            "default": 30
+          }, {
+            "type": "number",
+            "id": "dot-leftSP",
+            "label": "左からの位置",
+            "default": 20
+          }, {
+            "type": "header",
+            "content": "ツールチップ"
+          }, {
+            "type": "number",
+            "id": "tltip-top",
+            "label": "上からの位置",
+            "info": "単位％。マイナスも使えます",
+            "default": -150
+          }, {
+            "type": "number",
+            "id": "tltip-left",
+            "label": "左からの位置",
+            "info": "単位％。マイナスも使えます",
+            "default": -10
+          }, {
+            "type": "paragraph",
+            "content": "-- スマホ --"
+          }, {
+            "type": "number",
+            "id": "tltip-topSP",
+            "label": "上からの位置",
+            "info": "単位％。マイナスも使えます",
+            "default": -12
+          }, {
+            "type": "number",
+            "id": "tltip-leftSP",
+            "label": "左からの位置",
+            "info": "単位％。マイナスも使えます",
+            "default": -20
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "ホットスポット"
+      }
+    ]
+  }
+{% endschema %}

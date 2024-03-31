@@ -1,0 +1,196 @@
+.hot-spot {
+  position: relative;
+}
+.hot-spot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hot-spot a {
+  text-decoration: none;
+  transition-duration: 0.5s;
+}
+.hot-spot a:hover .viewmore {
+  text-decoration: underline;
+}
+.hot-spot a:empty,
+.hot-spot div:empty {
+  display: block;
+}
+.hot-spot .image-hotspot {
+  position: relative;
+  width: 100%;
+}
+@media screen and (max-width: 749px) {
+  .hot-spot .image-hotspot {
+    height: 80vh;
+  }
+}
+.hot-spot .tooltip-icon {
+  display: none;
+}
+.hot-spot label .tooltip-contents {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s linear;
+  padding: 3rem;
+}
+.hot-spot label .tooltip-contents a {
+  display: none;
+  position: absolute;
+  margin: 3rem;
+}
+.hot-spot .tooltip-icon:checked + label .tooltip-contents {
+  opacity: 1;
+  visibility: visible;
+}
+.hot-spot .tooltip-icon:checked + label .tooltip-contents a {
+  display: block;
+}
+@media screen and (min-width: 750px) {
+  .hot-spot .tooltip-icon:hover + label .tooltip-contents {
+    opacity: 1;
+    visibility: visible;
+  }
+  .hot-spot .tooltip-icon:hover + label .tooltip-contents a {
+    display: block;
+  }
+}
+.hot-spot input[type=checkbox] + label {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+}
+.hot-spot .icon2::before {
+  content: "";
+  position: absolute;
+  display: block;
+  box-sizing: border-box;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  margin: 20px;
+}
+.hot-spot .icon2::after {
+  position: absolute;
+  top: 10px;
+  left: 30px;
+  transform: translate(-50%, 50%) scale(1, 1);
+  pointer-events: none;
+  content: "";
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  transition: border-color 1s linear;
+  animation: light 4s linear infinite;
+}
+.hot-spot .icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  background: #8e44ad;
+  cursor: pointer;
+  z-index: 1;
+  margin: 20px;
+}
+.hot-spot .icon::after {
+  position: absolute;
+  top: 10px;
+  left: 30px;
+  transform: translate(-50%, 50%) scale(1, 1);
+  pointer-events: none;
+  content: "";
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  border: 1px solid #8e44ad;
+  transition: border-color 1s linear;
+  animation: light 4s linear infinite;
+}
+@keyframes light {
+  0% {
+    transform: translate(-50%, 50%) scale(1, 1);
+    opacity: 0;
+  }
+  20% {
+    transform: translate(-50%, 50%) scale(1.5, 1.5);
+    opacity: 0.9;
+  }
+  50% {
+    transform: translate(-50%, 50%) scale(2, 2);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, 50%) scale(2, 2);
+    opacity: 0;
+  }
+}
+.hot-spot .item {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+.hot-spot .tooltip {
+  position: absolute;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s linear;
+  padding: 3rem;
+  z-index: 2;
+}
+@media screen and (max-width: 749px) {
+  .hot-spot .tooltip {
+    padding: 5vw;
+  }
+}
+.hot-spot .hotspot__tooltip-inner {
+  display: flex;
+  justify-content: start;
+  flex-wrap: wrap;
+  padding: 1rem;
+  width: 30rem;
+  box-shadow: 0 0 3px #9b9b9b;
+}
+@media screen and (max-width: 749px) {
+  .hot-spot .hotspot__tooltip-inner {
+    width: 50vw;
+  }
+}
+.hot-spot .hotspot__tooltip-image-wrapper {
+  width: 33.3333333333%;
+}
+@media screen and (max-width: 749px) {
+  .hot-spot .hotspot__tooltip-image-wrapper {
+    width: 100%;
+    height: 100%;
+  }
+}
+.hot-spot .hotspot__tooltip-image-wrapper img {
+  height: auto;
+  max-height: 60%;
+}
+.hot-spot .hotspot__tooltip-txt-wrapper {
+  width: 66%;
+  padding: 0 1rem;
+}
+@media screen and (max-width: 749px) {
+  .hot-spot .hotspot__tooltip-txt-wrapper {
+    width: 100%;
+  }
+}
+.hot-spot .hotspot__tooltip-txt-wrapper h3, .hot-spot .hotspot__tooltip-txt-wrapper p {
+  margin: 0;
+}
+.hot-spot .hotspot__tooltip-txt-wrapper h3 {
+  line-height: 1.2;
+}
+.hot-spot .hotspot__tooltip-txt-wrapper p {
+  opacity: 0.7;
+  font-size: 1.5rem;
+}
