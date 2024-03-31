@@ -6,12 +6,14 @@
     <div class="category_lists_wrap __card">
       <ul class="category_lists card_wrap">
         <li>
-          <div><input
+          <div>
+            <input
               type="radio"
               id="category_all"
               name="category"
               value="all"
-              checked><label for="category_all">{{ section.settings.all }}</label>
+              checked>
+            <label for="category_all">{{ section.settings.all }}</label>
           </div>
         </li>
         {% for block in section.blocks %}
@@ -35,7 +37,7 @@
         {% for block in section.blocks %}
           {%- case block.type -%}
             {%- when 'menu' -%}
-              <li data-category="{{ block.settings.category }}" data-heading="{{ block.settings.heading }}">
+              <li data-category="{{ block.settings.category}}" data-heading="{{ block.settings.heading }}">
                 <a class="list_link">
                   <div class="menu_list_inner">
                     <div class="menu_info">
@@ -122,10 +124,10 @@
                       <input
                         type="radio"
                         name="book_datetime"
-                        id="{{ section.id }}-{{ forloop.index }}-{{ block.settings.heading }}"
+                        id="{{ block.settings.heading }}__{{ section.id }}-{{ forloop.index }}"
                         class="book_check user_check"
                         data-date="{{ datetime }}">
-                      <label class="book_info" for="{{ section.id }}-{{ forloop.index }}-{{ block.settings.heading }}">
+                      <label class="book_info" for="{{ block.settings.heading }}__{{ section.id }}-{{ forloop.index }}">
                         <div class="book_date">
                           <span class="icon_wrap">
                             <svg
@@ -231,10 +233,18 @@
   .{{ section.id }}.booking-contents .book_list input[type=radio] + label:before {
     border: 1px solid{{ section.settings.c-selected }};
   }
+
+  {% unless request.design_mode %}
+    #form {
+      display: none;
+    }
+  {% endunless %}
 </style>
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
+
+    // カテゴリーのイベントを表示
     let categoryButtons = document.querySelectorAll('input[type="radio"][name="category"]');
     categoryButtons.forEach(function(button) {
         button.addEventListener('click', function() {
@@ -248,7 +258,7 @@
             } else {
                 // 特定のカテゴリが選択された場合、そのカテゴリに合う項目のみを表示
                 menuItems.forEach(function(item) {
-                    let itemCategories = item.getAttribute('data-category').split(' ');
+                    let itemCategories = item.getAttribute('data-category').split(',');
                     if (itemCategories.includes(selectedCategory)) {
                         item.style.display = 'block';
                     } else {
@@ -263,6 +273,7 @@
         });
     });
 
+    // 日付の表示
     let listItems = document.querySelectorAll('.menu_lists li');
     listItems.forEach(function(listItem) {
         listItem.addEventListener('click', function() {
@@ -272,13 +283,12 @@
                 if (div.getAttribute('data-heading') === selectedHeading) {
                     div.style.display = 'block';
                     div.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                } else {
-                    div.style.display = 'none';
                 }
             });
         });
     });
 
+    // スクロールした時に日付の非表示
     let observer = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
             if (entry.isIntersecting) {
@@ -295,7 +305,7 @@
             }
         });
     }, {
-        threshold: 0.1
+        threshold: 0.3
     });
 
     let categoryListsWrap = document.querySelector('.category_lists_wrap.__card');
@@ -306,9 +316,9 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
+    let lastClicked = null;
     let urlParams = new URLSearchParams(window.location.search);
     let radioButtons = document.querySelectorAll('.book_check');
-    let lastClicked = null;
     let contactCustomContent = document.querySelector('.contact-custom');
     let userSelectedWrap = document.querySelector('.user_selected_feild');
     let processButtons = document.querySelectorAll('.process_btn');
@@ -322,14 +332,16 @@
 
     radioButtons.forEach(function(radio) {
         radio.addEventListener('click', function() {
+            // ラジオボタンのIDから見出しを取得
+            let heading = radio.id.split('__')[0];
+            let userSelectedField = document.getElementById('user_selected_' + heading);
+
             // ラジオボタンが前回クリックされたものと同じ場合、選択を解除
             if (lastClicked === radio && radio.checked) {
                 radio.checked = false;
                 lastClicked = null;
 
                 // 選択が解除されたので、表示内容もクリア
-                let heading = radio.id.split('-').pop(); // ラジオボタンのIDから見出しを取得
-                let userSelectedField = document.getElementById('user_selected_' + heading);
                 userSelectedField.style.display = 'none'; // user_selected_feildを非表示にする
                 if (contactCustomContent) {
                     contactCustomContent.style.display = 'none';
@@ -348,7 +360,7 @@
           if (radio.checked) {
 
                 // 対応するuser_selected_feildを特定する
-                let heading = radio.id.split('-').pop(); // ラジオボタンのIDから見出しを取得
+                let heading = radio.id.split('__')[0]; // ラジオボタンのIDから見出しを取得
                 let userSelectedField = document.getElementById('user_selected_' + heading);
 
                 // その他のuser_selected_feildを非表示にする
@@ -532,8 +544,8 @@
             "type": "text",
             "id": "category",
             "label": "振り分けたいカテゴリー名を入力",
-            "default": "LINEマーケティングセミナー ビギナー向けセミナー",
-            "info": "複数ある場合は半角スペースで追加"
+            "default": "LINEマーケティングセミナー,ビギナー向けセミナー",
+            "info": "複数ある場合はカンマ(,)で追加"
           },
           {
             "type": "text",
@@ -567,7 +579,8 @@
             "type": "html",
             "id": "datetime",
             "label": "日時",
-            "default": "2024年01月05日(金) 10:00~10:30,2024年01月06日(土) 10:00~10:30"
+            "default": "2024年01月05日(金) 10:00~10:30,2024年01月06日(土) 10:00~10:30",
+            "info": "複数ある場合はカンマ(,)で追加"
           }
         ]
       }
@@ -580,8 +593,7 @@
             "type": "category"
           }, {
             "type": "menu"
-          },
-          {
+          }, {
             "type": "category"
           }, {
             "type": "menu"

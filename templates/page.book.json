@@ -3,13 +3,14 @@
     "mv": {
       "type": "image-banner",
       "settings": {
+        "image": "shopify:\/\/shop_images\/crowd-participating-at-event.jpg",
         "image_overlay_opacity": 0,
         "image_height": "small",
         "desktop_content_position": "middle-center",
         "show_text_box": true,
         "desktop_content_alignment": "center",
         "color_scheme": "",
-        "image_behavior": "none",
+        "image_behavior": "fixed",
         "mobile_content_alignment": "center",
         "stack_images_on_mobile": true,
         "show_text_below": true
@@ -22,53 +23,53 @@
         "padding_bottom": 36
       }
     },
-    "list": {
+    "tab_list_diWHan": {
       "type": "tab-list",
       "blocks": {
-        "category": {
+        "category_zdK6Je": {
           "type": "category",
           "settings": {
-            "heading": "かてかて"
+            "heading": "LINE運用セミナー"
           }
         },
-        "menu": {
+        "category_4aUdKt": {
+          "type": "category",
+          "settings": {
+            "heading": "SNS構築セミナー"
+          }
+        },
+        "menu_HkQXb3": {
           "type": "menu",
           "settings": {
-            "heading": "ビギナー向けセミナー1",
-            "category": "LINEマーケティングセミナー ビギナー向けセミナー",
-            "time": "40分",
-            "tag": "抽選制",
-            "c-tag-bg": "#ffcf71",
+            "heading": "初めてのLINE運用",
+            "category": "LINE運用セミナー",
+            "time": "30分",
+            "tag": "先着順",
+            "c-tag-bg": "#71d2ff",
             "c-tag-txt": "#000000",
             "description": "<p>詳細が入ります詳細が入ります詳細が入ります詳細が入ります詳細が入ります<\/p>",
-            "datetime": "2024年01月05日(金) 10:00~10:30,2024年01月06日(土) 10:00~10:30"
+            "datetime": "2024年01月05日(金) 10:00~10:30,2024年01月06日(土) 10:00~10:30,2024年01月10日(水) 12:00~12:30"
           }
         },
-        "menu_PiAdUz": {
+        "menu_iaDipY": {
           "type": "menu",
           "settings": {
             "heading": "ビギナー向けセミナー",
-            "category": "LINEマーケティングセミナー ビギナー向けセミナー",
+            "category": "LINE運用セミナー,SNS構築セミナー",
             "time": "40分",
             "tag": "抽選制",
             "c-tag-bg": "#ffcf71",
             "c-tag-txt": "#000000",
             "description": "<p>詳細が入ります詳細が入ります詳細が入ります詳細が入ります詳細が入ります<\/p>",
             "datetime": "2024年01月05日(金) 10:00~10:30,2024年01月06日(土) 10:00~10:30"
-          }
-        },
-        "category_Re3KXG": {
-          "type": "category",
-          "settings": {
-            "heading": "LINEマーケティングセミナー"
           }
         }
       },
       "block_order": [
-        "category",
-        "menu",
-        "menu_PiAdUz",
-        "category_Re3KXG"
+        "category_zdK6Je",
+        "category_4aUdKt",
+        "menu_HkQXb3",
+        "menu_iaDipY"
       ],
       "settings": {
         "padding_top": 36,
@@ -77,13 +78,13 @@
         "title-selectDate": "ご希望日時を選択して下さい",
         "btn-txt": "詳細を見る",
         "btn-txt-confirm": "予約する",
-        "btn-radius": 25,
+        "btn-radius": 30,
         "c-btn-bg": "#4caf50",
         "c-btn-txt": "#ffffff",
         "c-checked": "#4caf50",
         "c-hover": "#e7f5f2",
         "c-selected": "#4abaa7",
-        "tag-radius": 9
+        "tag-radius": 13
       }
     },
     "form": {
@@ -126,10 +127,10 @@
       ],
       "settings": {
         "color_scheme": "",
-        "heading": "お問い合わせ",
+        "heading": "",
         "heading_size": "h1",
         "placeholder": true,
-        "enable-linkbtn": true,
+        "enable-linkbtn": false,
         "linkbtn-txt": "戻る",
         "linkbtn": "",
         "linkbtn2-txt": "戻る",
@@ -146,7 +147,7 @@
   "order": [
     "mv",
     "main",
-    "list",
+    "tab_list_diWHan",
     "form"
   ]
 }

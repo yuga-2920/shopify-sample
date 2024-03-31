@@ -452,7 +452,9 @@
     }
   }
 
-  customElements.define('sticky-header', StickyHeader);
+  if (!customElements.get('sticky-header')) {
+    customElements.define('sticky-header', StickyHeader);
+  }
 {% endjavascript %}
 
 <script type="application/ld+json">

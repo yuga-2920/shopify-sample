@@ -2,7 +2,7 @@
 
 <div class="{{ section.id }} color-{{ section.settings.color_scheme }} gradient">
   <div class="contact page-width page-width--narrow custom-wrapper__{{ section.id }}">
-    <div class="form-wrap">
+    <div id="form" class="form-wrap">
       {%- if section.settings.heading != blank -%}
         <h2 class="title title-wrapper--no-top-margin inline-richtext {{ section.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
           {{ section.settings.heading }}
@@ -313,13 +313,11 @@
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
   }
-  .{{ section.id }}
-  .form-group span {
+  .{{ section.id }} .form-group span {
     color: {{ section.settings.c-required }};
     font-size: 2rem;
   }
-  .{{ section.id }}
-  .form-status-list {
+  .{{ section.id }} .form-status-list {
     background: {{ section.settings.c-success-bg }};
     padding: 1rem;
   }
@@ -344,7 +342,7 @@
   }
 
   // 必須フィールドのチェック
-  function checkRequiredFields(agreeCheckbox) {
+  function checkRequiredFields(contactForm, agreeCheckbox) {
     let isAllValid = true;
 
     // 通常の入力フィールドのチェック
@@ -394,7 +392,7 @@
     function updateFormState() {
       updateFieldBackground(contactForm);
       const isEmailMatching = !emailConfirmInput || checkEmailMatch(emailConfirmInput, emailConfirmInput);
-      const isRequiredFieldsFilled = checkRequiredFields(agreeCheckbox);
+      const isRequiredFieldsFilled = checkRequiredFields(contactForm, agreeCheckbox);
       const isKanaValid = !kanaInput || validateKana(kanaInput);
 
       submitButton.disabled = !(isEmailMatching && isRequiredFieldsFilled);

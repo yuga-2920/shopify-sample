@@ -1,41 +1,37 @@
-.booking-contents .book_lists_wrap {
+.tab-lists .booking-contents .book_lists_wrap {
   list-style: none;
   padding: 0;
   margin: auto;
 }
-.booking-contents .book_list_title {
+.tab-lists .booking-contents .book_list_title {
   text-align: center;
 }
-.booking-contents .book_list {
+.tab-lists .booking-contents .book_list {
   display: flex;
   align-items: center;
-  -webkit-box-align: center;
   border-bottom: 1px dotted #ececec;
 }
-.booking-contents .book_list input[type=radio] {
+.tab-lists .booking-contents .book_list input[type=radio] {
   display: none;
 }
-.booking-contents .book_list input[type=radio] + label {
+.tab-lists .booking-contents .book_list input[type=radio] + label {
+  position: relative;
   display: flex;
   align-items: center;
-  position: relative;
   padding-left: 30px;
   margin-bottom: 20px;
   color: #333;
   cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
 }
 @media screen and (max-width: 749px) {
-  .booking-contents .book_list input[type=radio] + label {
+  .tab-lists .booking-contents .book_list input[type=radio] + label {
     line-height: 1;
   }
 }
-.booking-contents .book_list input[type=radio] + label:last-child {
+.tab-lists .booking-contents .book_list input[type=radio] + label:last-child {
   margin-bottom: 0;
 }
-.booking-contents .book_list input[type=radio] + label:before {
+.tab-lists .booking-contents .book_list input[type=radio] + label:before {
   content: "";
   display: block;
   width: 18px;
@@ -47,7 +43,7 @@
   -webkit-transition: all 0.12s, border-color 0.08s;
   transition: all 0.12s, border-color 0.08s;
 }
-.booking-contents .book_list input[type=radio]:checked + label:before {
+.tab-lists .booking-contents .book_list input[type=radio]:checked + label:before {
   width: 10px;
   top: 8px;
   left: 5px;
@@ -58,7 +54,7 @@
   -webkit-transform: rotate(45deg);
   transform: rotate(45deg);
 }
-.booking-contents .book_info {
+.tab-lists .booking-contents .book_info {
   padding: 8px;
   display: flex;
   flex-wrap: wrap;
@@ -66,38 +62,39 @@
   flex-grow: 1;
   gap: 1rem;
 }
-.booking-contents .icon_wrap {
+.tab-lists .booking-contents .icon_wrap {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 19px;
   height: 19px;
 }
-.booking-contents svg {
+.tab-lists .booking-contents svg {
   width: 100%;
   height: 100%;
 }
-.booking-contents .book_date, .booking-contents .book_time {
+.tab-lists .booking-contents .book_date,
+.tab-lists .booking-contents .book_time {
   display: flex;
   justify-content: start;
   align-items: center;
   gap: 0.5rem;
 }
-.booking-contents .user_selected_feild {
+.tab-lists .booking-contents .user_selected_feild {
   display: none;
   max-width: 560px;
   margin: 6rem auto;
 }
-.booking-contents .user_selected_wrap {
+.tab-lists .booking-contents .user_selected_wrap {
   padding: 1.6rem;
   border-radius: 4px;
   position: relative;
 }
-.booking-contents .user_selected_wrap h3 {
+.tab-lists .booking-contents .user_selected_wrap h3 {
   margin: 0;
   padding: 8px;
 }
-.booking-contents .selected_icon {
+.tab-lists .booking-contents .selected_icon {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -108,7 +105,7 @@
   left: 15px;
   background-color: var(--gradient-background);
 }
-.booking-contents .process_btn {
+.tab-lists .booking-contents .process_btn {
   max-width: 260px;
   display: block;
   text-align: center;
