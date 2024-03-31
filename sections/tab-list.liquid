@@ -222,15 +222,15 @@
     padding-bottom: {{ section.settings.padding_bottom }}px;
     background-color: {{ section.settings.background_color }};
   }
-  .{{ section.id }}.category_lists input[type=radio]:checked + label {
+  .{{ section.id }} .category_lists input[type=radio]:checked + label {
     background-color: {{ section.settings.c-checked }};
   }
-  .{{ section.id }}.list_link:hover,
-  .{{ section.id }}.category_lists li:hover {
+  .{{ section.id }} .list_link:hover,
+  .{{ section.id }} .category_lists li:hover {
     background-color: {{ section.settings.c-hover }};
   }
 
-  .{{ section.id }}.booking-contents .book_list input[type=radio] + label:before {
+  .{{ section.id }} .booking-contents .book_list input[type=radio] + label:before {
     border: 1px solid{{ section.settings.c-selected }};
   }
 
