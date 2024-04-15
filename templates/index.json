@@ -1,54 +1,5 @@
 {
   "sections": {
-    "hotspot_NUFn7h": {
-      "type": "hotspot",
-      "blocks": {
-        "spot_QMbpYL": {
-          "type": "spot",
-          "settings": {
-            "product": "strawberry-jam",
-            "dot-top": 40,
-            "dot-left": 35,
-            "dot-topSP": 30,
-            "dot-leftSP": 20,
-            "tltip-top": -10,
-            "tltip-left": -10,
-            "tltip-topSP": -12,
-            "tltip-leftSP": -20
-          }
-        },
-        "spot_tJndU6": {
-          "type": "spot",
-          "settings": {
-            "product": "coffee-beans",
-            "dot-top": 20,
-            "dot-left": 90,
-            "dot-topSP": 30,
-            "dot-leftSP": 20,
-            "tltip-top": -15,
-            "tltip-left": -20,
-            "tltip-topSP": -12,
-            "tltip-leftSP": -20
-          }
-        }
-      },
-      "block_order": [
-        "spot_QMbpYL",
-        "spot_tJndU6"
-      ],
-      "settings": {
-        "image": "shopify:\/\/shop_images\/two-pizzas-and-wine.jpg",
-        "image-h": 100,
-        "image-sp": "shopify:\/\/shop_images\/hand-holding-a-mushroom.jpg",
-        "image-h-sp": 80,
-        "c-btn": "#8e44ad",
-        "c-border": "#ffffff",
-        "c-border2": "#8e44ad",
-        "link-txt": "view more >",
-        "c-txt": "#000000",
-        "c-bk": "#ffffff"
-      }
-    },
     "custom_slideshow_CrbpC3": {
       "type": "custom-slideshow",
       "blocks": {
@@ -334,7 +285,6 @@
     }
   },
   "order": [
-    "hotspot_NUFn7h",
     "custom_slideshow_CrbpC3",
     "video_Ciphjp",
     "about_LBVqTp",
